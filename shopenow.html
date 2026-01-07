@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop Now | ShopCart</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/shopenow.css">
+</head>
+<body>
+    <!-- Overlay -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- Header -->
+    <header class="main-header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <h1>ShopCart</h1>
+                </div>
+                <div class="header-actions">
+                    <button class="header-btn" id="filterToggle">
+                        <i class="fas fa-filter"></i> Filters
+                    </button>
+                    <button class="header-btn cart-btn" id="cartIcon">
+                        <i class="fas fa-shopping-cart"></i> Cart <span class="cart-count">3</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Shop Now Hero -->
+    <section class="shop-hero">
+        <div class="container">
+            <h1>Shop Now</h1>
+            <p>Discover amazing products from top brands. Quality guaranteed with free shipping on all orders.</p>
+            <div class="category-buttons">
+                <button class="btn btn-primary" onclick="filterCategory('all')">All Products</button>
+                <button class="btn" onclick="filterCategory('electronics')" style="background: white; color: var(--dark);">Electronics</button>
+                <button class="btn" onclick="filterCategory('fashion')" style="background: white; color: var(--dark);">Fashion</button>
+                <button class="btn" onclick="filterCategory('home')" style="background: white; color: var(--dark);">Home & Living</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Shop Content -->
+    <div class="container">
+        <div class="shop-container">
+            <!-- Filters Sidebar -->
+            <aside class="filters-sidebar" id="filtersSidebar">
+                <div class="filter-section">
+                    <h3 class="filter-title">Categories</h3>
+                    <ul class="filter-options">
+                        <li class="filter-option">
+                            <input type="checkbox" id="cat1" checked>
+                            <label for="cat1">Electronics</label>
+                            <span class="category-count">(128)</span>
+                        </li>
+                        <li class="filter-option">
+                            <input type="checkbox" id="cat2">
+                            <label for="cat2">Fashion</label>
+                            <span class="category-count">(92)</span>
+                        </li>
+                        <li class="filter-option">
+                            <input type="checkbox" id="cat3">
+                            <label for="cat3">Home & Kitchen</label>
+                            <span class="category-count">(76)</span>
+                        </li>
+                        <li class="filter-option">
+                            <input type="checkbox" id="cat4">
+                            <label for="cat4">Beauty</label>
+                            <span class="category-count">(54)</span>
+                        </li>
+                        <li class="filter-option">
+                            <input type="checkbox" id="cat5">
+                            <label for="cat5">Sports</label>
+                            <span class="category-count">(41)</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="filter-section">
+                    <h3 class="filter-title">Price Range</h3>
+                    <input type="range" min="0" max="100000" value="50000" class="price-slider" id="priceSlider">
+                    <div class="price-range">
+                        <span>Rs 0</span>
+                        <span id="priceValue">Rs 50,000</span>
+                        <span>Rs 100,000+</span>
+                    </div>
+                </div>
+
+                <div class="filter-section">
+                    <h3 class="filter-title">Color</h3>
+                    <div class="color-options">
+                        <div class="color-option active" style="background: #3b82f6;" data-color="blue"></div>
+                        <div class="color-option" style="background: #ef4444;" data-color="red"></div>
+                        <div class="color-option" style="background: #22c55e;" data-color="green"></div>
+                        <div class="color-option" style="background: #000000;" data-color="black"></div>
+                        <div class="color-option" style="background: #fbbf24;" data-color="yellow"></div>
+                        <div class="color-option" style="background: #ffffff; border: 1px solid #ddd;" data-color="white"></div>
+                    </div>
+                </div>
+
+                <div class="filter-section">
+                    <h3 class="filter-title">Brand</h3>
+                    <ul class="filter-options">
+                        <li class="filter-option"><input type="checkbox" id="brand1"> <label for="brand1">Apple</label></li>
+                        <li class="filter-option"><input type="checkbox" id="brand2"> <label for="brand2">Samsung</label></li>
+                        <li class="filter-option"><input type="checkbox" id="brand3"> <label for="brand3">Sony</label></li>
+                        <li class="filter-option"><input type="checkbox" id="brand4"> <label for="brand4">Nike</label></li>
+                        <li class="filter-option"><input type="checkbox" id="brand5"> <label for="brand5">Adidas</label></li>
+                    </ul>
+                </div>
+
+                <button class="btn btn-primary apply-filters-btn" onclick="applyFilters()">Apply Filters</button>
+                <button class="btn reset-filters-btn" onclick="resetFilters()">Reset All</button>
+            </aside>
+
+            <!-- Products Section -->
+            <main>
+                <div class="shop-controls">
+                    <div class="results-count">Showing <span id="productCount">12</span> of 245 products</div>
+                    <div>
+                        <select class="sort-select" id="sortSelect">
+                            <option value="featured">Featured</option>
+                            <option value="price-low">Price: Low to High</option>
+                            <option value="price-high">Price: High to Low</option>
+                            <option value="newest">Newest Arrivals</option>
+                            <option value="rating">Top Rated</option>
+                        </select>
+                    </div>
+                    <div class="view-options">
+                        <button class="view-btn active" data-view="grid"><i class="fas fa-th-large"></i></button>
+                        <button class="view-btn" data-view="list"><i class="fas fa-list"></i></button>
+                    </div>
+                </div>
+
+                <div class="products-grid" id="productsGrid">
+                    <!-- Product cards will be generated by JavaScript -->
+                </div>
+
+                <!-- Pagination -->
+                <div class="pagination">
+                    <button class="page-btn"><i class="fas fa-chevron-left"></i></button>
+                    <button class="page-btn active">1</button>
+                    <button class="page-btn">2</button>
+                    <button class="page-btn">3</button>
+                    <button class="page-btn">4</button>
+                    <button class="page-btn">5</button>
+                    <button class="page-btn"><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h2>Your Cart (3)</h2>
+            <button class="close-cart" id="closeCart">&times;</button>
+        </div>
+        
+        <div class="cart-items">
+            <!-- Cart items will be populated by JavaScript -->
+        </div>
+        
+        <div class="cart-total">
+            <div class="total-row">
+                <span>Subtotal:</span>
+                <span>Rs 109,997</span>
+            </div>
+            <div class="total-row">
+                <span>Shipping:</span>
+                <span style="color: var(--success);">FREE</span>
+            </div>
+            <div class="total-row">
+                <span>Tax:</span>
+                <span>Rs 8,800</span>
+            </div>
+            <div class="total-row final">
+                <span>Total:</span>
+                <span>Rs 118,797</span>
+            </div>
+        </div>
+        
+        <button class="btn-checkout">Proceed to Checkout</button>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/shopenow.js"></script>
+</body>
+</html>

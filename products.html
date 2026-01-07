@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products | Shop Cart - Shop Thousands of Products</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/products.css">
+   
+  
+</head>
+<body>
+    <!-- Products Header -->
+    <section class="products-header">
+        <div class="container">
+            <div class="products-header-content">
+                <h1><i class="fas fa-shopping-bag"></i> All Products</h1>
+                <p class="subtitle">Browse our extensive collection of quality products</p>
+                
+                <div class="header-stats">
+                    <div class="stat-item">
+                        <div class="stat-value" id="total-products">10,000+</div>
+                        <div class="stat-label">Products</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">500+</div>
+                        <div class="stat-label">New Today</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">1,200+</div>
+                        <div class="stat-label">On Sale</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="breadcrumb">
+                <a href="index.html">Home</a> / <span>Products</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Content -->
+    <main class="products-container">
+        <div class="container">
+            <!-- Products Layout -->
+            <div class="products-layout">
+                <!-- Sidebar Filters -->
+                <aside class="products-sidebar">
+                    <!-- Mobile Filter Toggle -->
+                    <div class="mobile-filter-toggle">
+                        <button class="btn btn-outline" id="filter-toggle">
+                            <i class="fas fa-filter"></i> Filters
+                        </button>
+                        <div class="results-count">
+                            <span id="results-count">0</span> products found
+                        </div>
+                    </div>
+                    
+                    <!-- Filters Container -->
+                    <div class="filters-container" id="filters-container">
+                        <!-- Price Filter -->
+                        <div class="filter-section">
+                            <div class="filter-header">
+                                <h3><i class="fas fa-tag"></i> Price Range</h3>
+                                <button class="filter-clear" data-filter="price">Clear</button>
+                            </div>
+                            <div class="filter-content">
+                                <div class="price-range">
+                                    <div class="price-inputs">
+                                        <input type="number" id="min-price" placeholder="Min" min="0" max="10000">
+                                        <span>-</span>
+                                        <input type="number" id="max-price" placeholder="Max" min="0" max="10000">
+                                    </div>
+                                    <div class="price-slider">
+                                        <div class="slider-track"></div>
+                                        <input type="range" id="price-slider-min" min="0" max="1000" value="0">
+                                        <input type="range" id="price-slider-max" min="0" max="1000" value="1000">
+                                    </div>
+                                    <div class="price-labels">
+                                        <span>Rs 0</span>
+                                        <span>Rs 50,000</span>
+                                        <span>Rs 100,000+</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Category Filter -->
+                        <div class="filter-section">
+                            <div class="filter-header">
+                                <h3><i class="fas fa-th-large"></i> Categories</h3>
+                                <button class="filter-clear" data-filter="category">Clear</button>
+                            </div>
+                            <div class="filter-content">
+                                <div class="filter-categories">
+                                    <label class="filter-category">
+                                        <input type="checkbox" name="category" value="electronics">
+                                        <span class="checkmark"></span>
+                                        <span class="category-name">Electronics</span>
+                                        <span class="category-count">(1,250)</span>
+                                    </label>
+                                    <label class="filter-category">
+                                        <input type="checkbox" name="category" value="fashion">
+                                        <span class="checkmark"></span>
+                                        <span class="category-name">Fashion</span>
+                                        <span class="category-count">(2,550)</span>
+                                    </label>
+                                    <label class="filter-category">
+                                        <input type="checkbox" name="category" value="home">
+                                        <span class="checkmark"></span>
+                                        <span class="category-name">Home & Garden</span>
+                                        <span class="category-count">(1,820)</span>
+                                    </label>
+                                    <label class="filter-category">
+                                        <input type="checkbox" name="category" value="sports">
+                                        <span class="checkmark"></span>
+                                        <span class="category-name">Sports</span>
+                                        <span class="category-count">(890)</span>
+                                    </label>
+                                    <label class="filter-category">
+                                        <input type="checkbox" name="category" value="beauty">
+                                        <span class="checkmark"></span>
+                                        <span class="category-name">Beauty</span>
+                                        <span class="category-count">(1,340)</span>
+                                    </label>
+                                    <button class="view-more-categories">+ View All Categories</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Brand Filter -->
+                        <div class="filter-section">
+                            <div class="filter-header">
+                                <h3><i class="fas fa-crown"></i> Brands</h3>
+                                <button class="filter-clear" data-filter="brand">Clear</button>
+                            </div>
+                            <div class="filter-content">
+                                <div class="filter-search">
+                                    <input type="text" placeholder="Search brands...">
+                                </div>
+                                <div class="filter-brands">
+                                    <label class="filter-brand">
+                                        <input type="checkbox" name="brand" value="apple">
+                                        <span class="checkmark"></span>
+                                        <span class="brand-name">Apple</span>
+                                        <span class="brand-count">(320)</span>
+                                    </label>
+                                    <label class="filter-brand">
+                                        <input type="checkbox" name="brand" value="samsung">
+                                        <span class="checkmark"></span>
+                                        <span class="brand-name">Samsung</span>
+                                        <span class="brand-count">(280)</span>
+                                    </label>
+                                    <label class="filter-brand">
+                                        <input type="checkbox" name="brand" value="sony">
+                                        <span class="checkmark"></span>
+                                        <span class="brand-name">Sony</span>
+                                        <span class="brand-count">(210)</span>
+                                    </label>
+                                    <label class="filter-brand">
+                                        <input type="checkbox" name="brand" value="nike">
+                                        <span class="checkmark"></span>
+                                        <span class="brand-name">Nike</span>
+                                        <span class="brand-count">(450)</span>
+                                    </label>
+                                    <label class="filter-brand">
+                                        <input type="checkbox" name="brand" value="adidas">
+                                        <span class="checkmark"></span>
+                                        <span class="brand-name">Adidas</span>
+                                        <span class="brand-count">(380)</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Rating Filter -->
+                        <div class="filter-section">
+                            <div class="filter-header">
+                                <h3><i class="fas fa-star"></i> Customer Rating</h3>
+                                <button class="filter-clear" data-filter="rating">Clear</button>
+                            </div>
+                            <div class="filter-content">
+                                <div class="filter-ratings">
+                                    <label class="filter-rating">
+                                        <input type="radio" name="rating" value="4">
+                                        <span class="stars">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                        </span>
+                                        <span class="rating-count">(1,250+)</span>
+                                    </label>
+                                    <label class="filter-rating">
+                                        <input type="radio" name="rating" value="3">
+                                        <span class="stars">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="far fa-star"></i>
+                                        </span>
+                                        <span class="rating-count">(2,100+)</span>
+                                    </label>
+                                    <label class="filter-rating">
+                                        <input type="radio" name="rating" value="2">
+                                        <span class="stars">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="far fa-star"></i>
+                                            <i class="far fa-star"></i>
+                                        </span>
+                                        <span class="rating-count">(1,580+)</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Sort By -->
+                        <div class="filter-section">
+                            <div class="filter-header">
+                                <h3><i class="fas fa-sort"></i> Sort By</h3>
+                            </div>
+                            <div class="filter-content">
+                                <select id="sort-by" class="sort-select">
+                                    <option value="featured">Featured</option>
+                                    <option value="newest">Newest</option>
+                                    <option value="price-low">Price: Low to High</option>
+                                    <option value="price-high">Price: High to Low</option>
+                                    <option value="rating">Customer Rating</option>
+                                    <option value="popular">Most Popular</option>
+                                    <option value="discount">Best Discount</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+
+                <!-- Main Products Area -->
+                <section class="products-main">
+                    <!-- Products Header Bar -->
+                    <div class="products-header-bar">
+                        <div class="view-options">
+                            <button class="view-btn active" data-view="grid">
+                                <i class="fas fa-th-large"></i>
+                            </button>
+                            <button class="view-btn" data-view="list">
+                                <i class="fas fa-list"></i>
+                            </button>
+                        </div>
+                        
+                        <div class="products-per-page">
+                            <span>Show:</span>
+                            <select id="per-page">
+                                <option value="12">12</option>
+                                <option value="24">24</option>
+                                <option value="48">48</option>
+                                <option value="96">96</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Products Grid/List -->
+                    <div class="products-view" id="products-view">
+                        <!-- Grid View -->
+                        <div class="products-grid active" id="products-grid">
+                            <!-- Product 1 -->
+                            <div class="product-card">
+                                <div class="product-image">
+                                    <div style="font-size: 4rem;">📱</div>
+                                </div>
+                                <div class="product-info">
+                                    <h3 class="product-title">Smartphone Pro X</h3>
+                                    <div class="product-price">Rs69,999</div>
+                                    <button class="btn-primary">Add to Cart</button>
+                                </div>
+                            </div>
+                            
+                            <!-- Product 2 -->
+                            <div class="product-card">
+                                <div class="product-image">
+                                    <div style="font-size: 4rem;">💻</div>
+                                </div>
+                                <div class="product-info">
+                                    <h3 class="product-title">Laptop Ultra</h3>
+                                    <div class="product-price">Rs129,999</div>
+                                    <button class="btn-primary">Add to Cart</button>
+                                </div>
+                            </div>
+                            
+                            <!-- Product 3 -->
+                            <div class="product-card">
+                                <div class="product-image">
+                                    <div style="font-size: 4rem;">🎧</div>
+                                </div>
+                                <div class="product-info">
+                                    <h3 class="product-title">Wireless Headphones</h3>
+                                    <div class="product-price">Rs19,999</div>
+                                    <button class="btn-primary">Add to Cart</button>
+                                </div>
+                            </div>
+                            
+                            <!-- Product 4 -->
+                            <div class="product-card">
+                                <div class="product-image">
+                                    <div style="font-size: 4rem;">⌚</div>
+                                </div>
+                                <div class="product-info">
+                                    <h3 class="product-title">Smart Watch</h3>
+                                    <div class="product-price">Rs29,999</div>
+                                    <button class="btn-primary">Add to Cart</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Products Info -->
+                    <div class="products-info">
+                        <div class="info-card">
+                            <i class="fas fa-shipping-fast"></i>
+                            <div>
+                                <h4>Free Shipping</h4>
+                                <p>On orders over Rs50</p>
+                            </div>
+                        </div>
+                        <div class="info-card">
+                            <i class="fas fa-undo"></i>
+                            <div>
+                                <h4>30-Day Returns</h4>
+                                <p>Easy return policy</p>
+                            </div>
+                        </div>
+                        <div class="info-card">
+                            <i class="fas fa-shield-alt"></i>
+                            <div>
+                                <h4>Secure Shopping</h4>
+                                <p>SSL encryption</p>
+                            </div>
+                        </div>
+                        <div class="info-card">
+                            <i class="fas fa-headset"></i>
+                            <div>
+                                <h4>24/7 Support</h4>
+                                <p>Always here to help</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Product Categories Preview -->
+            <section class="categories-preview">
+                <div class="section-header">
+                    <h2><i class="fas fa-th-large"></i> Shop by Category</h2>
+                    <a href="categories.html" class="view-all">View All Categories <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="categories-grid">
+                    <a href="products.html?category=electronics" class="category-preview">
+                        <div class="category-icon">
+                            <i class="fas fa-laptop"></i>
+                        </div>
+                        <h3>Electronics</h3>
+                        <p>1,250+ products</p>
+                    </a>
+                    <a href="products.html?category=fashion" class="category-preview">
+                        <div class="category-icon">
+                            <i class="fas fa-tshirt"></i>
+                        </div>
+                        <h3>Fashion</h3>
+                        <p>2,550+ products</p>
+                    </a>
+                    <a href="products.html?category=home" class="category-preview">
+                        <div class="category-icon">
+                            <i class="fas fa-home"></i>
+                        </div>
+                        <h3>Home & Garden</h3>
+                        <p>1,820+ products</p>
+                    </a>
+                    <a href="products.html?category=beauty" class="category-preview">
+                        <div class="category-icon">
+                            <i class="fas fa-spa"></i>
+                        </div>
+                        <h3>Beauty</h3>
+                        <p>1,340+ products</p>
+                    </a>
+                </div>
+            </section>
+        </div>
+    </main>
+
+   
+
+    <script>
+        // Basic functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // View toggle
+            const viewButtons = document.querySelectorAll('.view-btn');
+            viewButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    viewButtons.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+            
+            // Add to cart buttons
+            const addToCartButtons = document.querySelectorAll('.btn-primary');
+            addToCartButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const productName = this.closest('.product-card').querySelector('.product-title').textContent;
+                    alert(`${productName} added to cart!`);
+                });
+            });
+            
+            // Newsletter form
+            const newsletterForm = document.querySelector('.newsletter-form');
+            if (newsletterForm) {
+                newsletterForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const email = this.querySelector('input[type="email"]').value;
+                    if (email) {
+                        alert('Thank you for subscribing to our newsletter!');
+                        this.querySelector('input[type="email"]').value = '';
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>

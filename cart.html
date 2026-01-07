@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart | Modern Store</title>
+    <link rel="stylesheet" href="css/cart.css">
+</head>
+<body>
+
+    <!-- Main Cart Content -->
+    <main class="container cart-container">
+        <div class="cart-header">
+            <h1>Your Shopping Cart</h1>
+            <p class="cart-subtitle">Review your items and proceed to checkout</p>
+        </div>
+
+        <div class="cart-layout">
+            <!-- Cart Items Section -->
+            <div class="cart-items">
+                <div class="cart-items-header">
+                    <h3>Cart Items (<span id="itemCount">0</span>)</h3>
+                    <button class="clear-cart-btn" id="clearCartBtn">
+                        <i class="fas fa-trash-alt"></i> Clear Cart
+                    </button>
+                </div>
+
+                <div id="cartItemsContainer">
+                    <!-- Cart items will be loaded here by JavaScript -->
+                </div>
+            </div>
+
+            <!-- Cart Summary Section -->
+            <div class="cart-summary">
+                <h3>Order Summary</h3>
+                <div class="summary-row">
+                    <span class="summary-label">Subtotal</span>
+                    <span class="summary-value" id="subtotal">Rs 0.00</span>
+                </div>
+                <div class="summary-row">
+                    <span class="summary-label">Discount</span>
+                    <span class="summary-value discount-amount" id="discount">-Rs 0.00</span>
+                </div>
+                <div class="summary-row">
+                    <span class="summary-label">Shipping</span>
+                    <span class="summary-value" id="shipping">Free</span>
+                </div>
+                <div class="summary-row">
+                    <span class="summary-label">Tax</span>
+                    <span class="summary-value tax-amount" id="tax">Rs 0.00</span>
+                </div>
+                <div class="summary-row">
+                    <span class="summary-label">Total</span>
+                    <span class="summary-value summary-total" id="total">Rs 0.00</span>
+                </div>
+
+                <button class="btn-checkout" id="checkoutBtn">
+                    <i class="fas fa-lock"></i> Proceed to Checkout
+                </button>
+
+                <div class="promo-section">
+                    <p>Have a promo code?</p>
+                    <div class="promo-input-group">
+                        <input type="text" class="promo-input" id="promoInput" placeholder="Enter promo code">
+                        <button class="btn-apply" id="applyPromoBtn">Apply</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recommended Products -->
+        <section class="products-section">
+            <div class="section-title">
+                <h2>You Might Also Like</h2>
+                <p>Check out these popular products</p>
+            </div>
+            <div class="products-grid" id="productsGrid">
+                <!-- Products will be loaded by JavaScript -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <i class="fas fa-check-circle"></i>
+        <span id="toastMessage"></span>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // ===== CART MANAGEMENT SYSTEM =====
+        const Cart = {
+            items: [],
+            subtotal: 0,
+            discount: 0,
+            shipping: 0,
+            tax: 0,
+            total: 0,
+            appliedPromo: null,
+
+            promoCodes: {
+                'SAVE10': { type: 'percentage', value: 10, minPurchase: 50 },
+                'SAVE20': { type: 'percentage', value: 20, minPurchase: 100 },
+                'FREESHIP': { type: 'shipping', value: 0 },
+                'FLAT15': { type: 'fixed', value: 15 }
+            },
+
+            init() {
+                this.loadFromStorage();
+                this.setupEventListeners();
+                this.render();
+                this.loadProducts();
+            },
+
+            loadFromStorage() {
+                const savedCart = localStorage.getItem('shopCart');
+                if (savedCart) {
+                    const data = JSON.parse(savedCart);
+                    this.items = data.items || [];
+                    this.appliedPromo = data.appliedPromo || null;
+                }
+                this.calculateTotals();
+            },
+
+            saveToStorage() {
+                const data = { items: this.items, appliedPromo: this.appliedPromo };
+                localStorage.setItem('shopCart', JSON.stringify(data));
+            },
+
+            setupEventListeners() {
+                document.getElementById('clearCartBtn')?.addEventListener('click', () => this.clearCart());
+                document.getElementById('checkoutBtn')?.addEventListener('click', () => this.checkout());
+                document.getElementById('applyPromoBtn')?.addEventListener('click', () => this.applyPromoCode());
+                document.getElementById('promoInput')?.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') this.applyPromoCode();
+                });
+
+                const menuToggle = document.getElementById('menuToggle');
+                const navLinks = document.getElementById('navLinks');
+                
+                if (menuToggle && navLinks) {
+                    menuToggle.addEventListener('click', () => {
+                        navLinks.classList.toggle('active');
+                        menuToggle.querySelector('i').classList.toggle('fa-bars');
+                        menuToggle.querySelector('i').classList.toggle('fa-times');
+                    });
+                    document.addEventListener('click', (e) => {
+                        if (!menuToggle.contains(e.target) && !navLinks.contains(e.target)) {
+                            navLinks.classList.remove('active');
+                            menuToggle.querySelector('i').classList.add('fa-bars');
+                            menuToggle.querySelector('i').classList.remove('fa-times');
+                        }
+                    });
+                }
+            },
+
+            render() {
+                this.renderCartItems();
+                this.renderSummary();
+                this.updateCartCount();
+            },
+
+            renderCartItems() {
+                const container = document.getElementById('cartItemsContainer');
+                const itemCount = document.getElementById('itemCount');
+                
+                if (!container) return;
+
+                if (this.items.length === 0) {
+                    container.innerHTML = `
+                        <div class="cart-empty">
+                            <i class="fas fa-shopping-cart"></i>
+                            <h3>Your cart is empty</h3>
+                            <p>Looks like you haven't added any items to your cart yet.</p>
+                            <a href="products.html" class="btn-continue">
+                                <i class="fas fa-shopping-bag"></i> Continue Shopping
+                            </a>
+                        </div>
+                    `;
+                    itemCount.textContent = '0';
+                    return;
+                }
+
+                itemCount.textContent = this.items.length;
+                
+                container.innerHTML = this.items.map((item, index) => {
+                    const originalPrice = item.price * item.quantity;
+                    const discountAmount = item.discount ? (originalPrice * item.discount) / 100 : 0;
+                    const finalPrice = originalPrice - discountAmount;
+                    
+                    return `
+                        <div class="cart-item" data-index="${index}">
+                            <div class="cart-item-img">
+                                <img src="${item.image}" alt="${item.name}" onerror="this.src='https://via.placeholder.com/100'">
+                            </div>
+                            <div class="cart-item-details">
+                                <h3 class="cart-item-title">${item.name}</h3>
+                                <span class="cart-item-category">${item.category || 'General'}</span>
+                                <div>
+                                    <span class="cart-item-price">Rs ${finalPrice.toFixed(2)}</span>
+                                    ${item.originalPrice > item.price ? 
+                                        `<span class="cart-item-old-price">Rs ${item.originalPrice.toFixed(2)}</span>` : ''}
+                                    ${item.discount ? 
+                                        `<span class="cart-item-discount">-${item.discount}%</span>` : ''}
+                                </div>
+                            </div>
+                            <div class="cart-item-controls">
+                                <div class="quantity-control">
+                                    <button class="qty-btn minus" data-action="decrease">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                    <input type="number" class="qty-input" value="${item.quantity}" min="1" max="99">
+                                    <button class="qty-btn plus" data-action="increase">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                                <button class="btn-remove" data-action="remove">
+                                    <i class="fas fa-trash"></i> Remove
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+
+                container.querySelectorAll('.cart-item').forEach(item => {
+                    const index = parseInt(item.dataset.index);
+                    const qtyInput = item.querySelector('.qty-input');
+                    const minusBtn = item.querySelector('.qty-btn.minus');
+                    const plusBtn = item.querySelector('.qty-btn.plus');
+                    const removeBtn = item.querySelector('.btn-remove');
+
+                    minusBtn.addEventListener('click', () => this.updateQuantity(index, -1));
+                    plusBtn.addEventListener('click', () => this.updateQuantity(index, 1));
+                    removeBtn.addEventListener('click', () => this.removeItem(index));
+
+                    qtyInput.addEventListener('change', (e) => {
+                        const newQty = parseInt(e.target.value);
+                        if (newQty >= 1 && newQty <= 99) {
+                            this.setQuantity(index, newQty);
+                        } else {
+                            e.target.value = this.items[index].quantity;
+                        }
+                    });
+
+                    qtyInput.addEventListener('blur', (e) => {
+                        if (!e.target.value || parseInt(e.target.value) < 1) {
+                            e.target.value = 1;
+                            this.setQuantity(index, 1);
+                        }
+                    });
+                });
+            },
+
+            renderSummary() {
+                document.getElementById('subtotal').textContent = `Rs ${this.subtotal.toFixed(2)}`;
+                document.getElementById('discount').textContent = `-Rs ${this.discount.toFixed(2)}`;
+                document.getElementById('shipping').textContent = this.shipping === 0 ? 'Free' : `Rs ${this.shipping.toFixed(2)}`;
+                document.getElementById('tax').textContent = `Rs ${this.tax.toFixed(2)}`;
+                document.getElementById('total').textContent = `Rs ${this.total.toFixed(2)}`;
+
+                const checkoutBtn = document.getElementById('checkoutBtn');
+                if (checkoutBtn) {
+                    checkoutBtn.disabled = this.items.length === 0;
+                    if (this.items.length === 0) {
+                        checkoutBtn.innerHTML = '<i class="fas fa-lock"></i> Cart is Empty';
+                    } else {
+                        checkoutBtn.innerHTML = `<i class="fas fa-lock"></i> Proceed to Checkout (Rs ${this.total.toFixed(2)})`;
+                    }
+                }
+            },
+
+            updateCartCount() {
+                const cartCount = document.getElementById('cartCount');
+                if (cartCount) {
+                    const totalItems = this.items.reduce((sum, item) => sum + item.quantity, 0);
+                    cartCount.textContent = totalItems;
+                    cartCount.style.display = totalItems > 0 ? 'flex' : 'none';
+                }
+            },
+
+            calculateTotals() {
+                this.subtotal = this.items.reduce((sum, item) => {
+                    const itemPrice = item.price * item.quantity;
+                    const discount = item.discount ? (itemPrice * item.discount) / 100 : 0;
+                    return sum + (itemPrice - discount);
+                }, 0);
+
+                if (this.appliedPromo) {
+                    this.applyPromo(this.appliedPromo);
+                } else {
+                    this.discount = 0;
+                    this.shipping = this.subtotal > 0 ? 5.99 : 0;
+                }
+
+                this.tax = (this.subtotal - this.discount) * 0.08;
+                this.total = this.subtotal - this.discount + this.shipping + this.tax;
+            },
+
+            addItem(product) {
+                const existingIndex = this.items.findIndex(item => item.id === product.id);
+                
+                if (existingIndex > -1) {
+                    this.items[existingIndex].quantity += product.quantity || 1;
+                    this.showToast(`${product.name} quantity updated`, 'success');
+                } else {
+                    const cartItem = {
+                        id: product.id,
+                        name: product.name,
+                        price: product.price,
+                        originalPrice: product.originalPrice || product.price,
+                        image: product.image,
+                        category: product.category,
+                        quantity: product.quantity || 1,
+                        discount: product.discount || 0
+                    };
+                    this.items.push(cartItem);
+                    this.showToast(`${product.name} added to cart!`, 'success');
+                }
+                
+                this.saveToStorage();
+                this.calculateTotals();
+                this.render();
+            },
+
+            updateQuantity(index, change) {
+                if (index < 0 || index >= this.items.length) return;
+                
+                const newQty = this.items[index].quantity + change;
+                
+                if (newQty < 1) {
+                    this.removeItem(index);
+                    return;
+                }
+                
+                if (newQty > 99) {
+                    this.showToast('Maximum quantity is 99 per item', 'warning');
+                    return;
+                }
+                
+                this.items[index].quantity = newQty;
+                this.saveToStorage();
+                this.calculateTotals();
+                this.render();
+            },
+
+            setQuantity(index, quantity) {
+                if (index < 0 || index >= this.items.length) return;
+                
+                if (quantity < 1) {
+                    this.removeItem(index);
+                    return;
+                }
+                
+                if (quantity > 99) {
+                    this.showToast('Maximum quantity is 99 per item', 'warning');
+                    quantity = 99;
+                }
+                
+                this.items[index].quantity = quantity;
+                this.saveToStorage();
+                this.calculateTotals();
+                this.render();
+            },
+
+            removeItem(index) {
+                if (index < 0 || index >= this.items.length) return;
+                
+                const itemName = this.items[index].name;
+                this.items.splice(index, 1);
+                
+                this.saveToStorage();
+                this.calculateTotals();
+                this.render();
+                
+                this.showToast(`${itemName} removed from cart`, 'success');
+            },
+
+            clearCart() {
+                if (this.items.length === 0) {
+                    this.showToast('Cart is already empty', 'warning');
+                    return;
+                }
+
+                if (confirm('Are you sure you want to clear your cart?')) {
+                    this.items = [];
+                    this.appliedPromo = null;
+                    this.saveToStorage();
+                    this.calculateTotals();
+                    this.render();
+                    this.showToast('Cart cleared successfully', 'success');
+                }
+            },
+
+            applyPromoCode() {
+                const promoInput = document.getElementById('promoInput');
+                if (!promoInput) return;
+
+                const code = promoInput.value.trim().toUpperCase();
+                
+                if (!code) {
+                    this.showToast('Please enter a promo code', 'warning');
+                    return;
+                }
+
+                const promo = this.promoCodes[code];
+                
+                if (!promo) {
+                    this.showToast('Invalid promo code', 'error');
+                    promoInput.value = '';
+                    return;
+                }
+
+                if (promo.type === 'percentage' && this.subtotal < promo.minPurchase) {
+                    this.showToast(`Minimum purchase of Rs ${promo.minPurchase} required`, 'warning');
+                    return;
+                }
+
+                this.appliedPromo = code;
+                this.applyPromo(code);
+                this.saveToStorage();
+                this.calculateTotals();
+                this.render();
+                
+                this.showToast(`Promo code "${code}" applied!`, 'success');
+                promoInput.value = '';
+            },
+
+            applyPromo(code) {
+                const promo = this.promoCodes[code];
+                if (!promo) return;
+
+                switch (promo.type) {
+                    case 'percentage':
+                        this.discount = (this.subtotal * promo.value) / 100;
+                        this.shipping = this.subtotal > 0 ? 5.99 : 0;
+                        break;
+                    case 'fixed':
+                        this.discount = Math.min(promo.value, this.subtotal);
+                        this.shipping = this.subtotal > 0 ? 5.99 : 0;
+                        break;
+                    case 'shipping':
+                        this.discount = 0;
+                        this.shipping = promo.value;
+                        break;
+                }
+            },
+
+            checkout() {
+                if (this.items.length === 0) {
+                    this.showToast('Your cart is empty', 'warning');
+                    return;
+                }
+
+                const checkoutBtn = document.getElementById('checkoutBtn');
+                if (checkoutBtn) {
+                    checkoutBtn.innerHTML = '<div class="loading-spinner"></div> Processing...';
+                    checkoutBtn.disabled = true;
+                }
+
+                setTimeout(() => {
+                    console.log('Checkout data:', {
+                        items: this.items,
+                        subtotal: this.subtotal,
+                        discount: this.discount,
+                        shipping: this.shipping,
+                        tax: this.tax,
+                        total: this.total,
+                        promo: this.appliedPromo
+                    });
+
+                    this.showToast('Redirecting to checkout...', 'success');
+
+                    setTimeout(() => {
+                        this.clearCart();
+                        if (checkoutBtn) {
+                            checkoutBtn.disabled = false;
+                            checkoutBtn.innerHTML = '<i class="fas fa-lock"></i> Proceed to Checkout';
+                        }
+                    }, 2000);
+                }, 1500);
+            },
+
+            showToast(message, type = 'success') {
+                const toast = document.getElementById('toast');
+                const toastMessage = document.getElementById('toastMessage');
+                
+                if (!toast || !toastMessage) return;
+
+                toastMessage.textContent = message;
+                toast.className = 'toast';
+                
+                let icon = 'fa-check-circle';
+                if (type === 'error') {
+                    toast.classList.add('error');
+                    icon = 'fa-exclamation-circle';
+                } else if (type === 'warning') {
+                    toast.classList.add('warning');
+                    icon = 'fa-exclamation-triangle';
+                }
+
+                toast.innerHTML = `<i class="fas ${icon}"></i> <span id="toastMessage">${message}</span>`;
+                toast.classList.add('show');
+
+                setTimeout(() => {
+                    toast.classList.remove('show');
+                }, 3000);
+            },
+
+            loadProducts() {
+                const products = [
+                    {
+                        id: 101,
+                        name: "Wireless Bluetooth Headphones",
+                        price: 89.99,
+                        originalPrice: 129.99,
+                        image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400",
+                        category: "Electronics",
+                        discount: 30
+                    },
+                    {
+                        id: 102,
+                        name: "Smart Watch Series 5",
+                        price: 249.99,
+                        originalPrice: 299.99,
+                        image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400",
+                        category: "Electronics",
+                        discount: 16
+                    },
+                    
+                    {
+                        id: 104,
+                        name: "Organic Cotton T-Shirt",
+                        price: 29.99,
+                        originalPrice: 39.99,
+                        image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400",
+                        category: "Fashion",
+                        discount: 25
+                    }
+                ];
+
+                const productsGrid = document.getElementById('productsGrid');
+                if (!productsGrid) return;
+
+                productsGrid.innerHTML = products.map(product => {
+                    const discount = product.discount ? 
+                        `<span class="discount-badge">-${product.discount}%</span>` : '';
+                    
+                    const originalPrice = product.originalPrice > product.price ?
+                        `<span class="original-price">Rs ${product.originalPrice.toFixed(2)}</span>` : '';
+
+                    return `
+                        <div class="product-card">
+                            <div class="product-img">
+                                <img src="${product.image}" alt="${product.name}" onerror="this.style.display='none'">
+                                <i class="fas fa-box" style="display: none;"></i>
+                            </div>
+                            <div class="product-content">
+                                <h3 class="product-title">${product.name}</h3>
+                                <div class="product-category">${product.category}</div>
+                                <div class="product-price">
+                                    <span class="current-price">Rs ${product.price.toFixed(2)}</span>
+                                    ${originalPrice}
+                                    ${discount}
+                                </div>
+                                <button class="btn-add-to-cart" onclick="Cart.addItem(${JSON.stringify(product).replace(/"/g, '&quot;')})">
+                                    <i class="fas fa-cart-plus"></i> Add to Cart
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            }
+        };
+
+        window.addEventListener('DOMContentLoaded', () => Cart.init());
+    </script>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Track Order | ShopCart</title>
+
+    <!-- Icons & CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/track-order.css">
+</head>
+<body>
+
+<!-- Track Order -->
+<div class="track-container">
+    <div class="track-header">
+        <h1><i class="fas fa-truck"></i> Track Your Order</h1>
+        <p>Enter your Order ID to see delivery status</p>
+    </div>
+
+    <div class="track-form">
+        <input type="text" id="orderId" placeholder="Enter Order ID (e.g. ORD-123456)">
+        <button onclick="trackOrder()">Track Order</button>
+    </div>
+
+    <p class="error-msg" id="errorMsg">❌ Order not found. Please check your Order ID.</p>
+
+    <div class="order-details" id="orderDetails">
+        <div class="order-card">
+            <h3>Order Summary</h3>
+            <p><strong>Order ID:</strong> <span id="o-id"></span></p>
+            <p><strong>Customer:</strong> John Doe</p>
+            <p><strong>Delivery Address:</strong> Islamabad, Pakistan</p>
+            <p><strong>Estimated Delivery:</strong> 3–5 Business Days</p>
+        </div>
+
+        <div class="order-card">
+            <h3>Order Status</h3>
+            <div class="status-steps">
+                <div class="step active">
+                    <i class="fas fa-receipt"></i>
+                    <span>Order Placed</span>
+                </div>
+                <div class="step active">
+                    <i class="fas fa-box"></i>
+                    <span>Packed</span>
+                </div>
+                <div class="step active">
+                    <i class="fas fa-shipping-fast"></i>
+                    <span>Shipped</span>
+                </div>
+                <div class="step">
+                    <i class="fas fa-home"></i>
+                    <span>Delivered</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- JS -->
+<script src="js/track-order.js"></script>
+
+</body>
+</html>

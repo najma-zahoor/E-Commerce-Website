@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | ShopCart - We're Here to Help</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/contact.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            
+                <div class="user-menu" style="display: none;">
+                    <div class="user-dropdown">
+                        <button class="user-dropdown-toggle">
+                            <img src="https://via.placeholder.com/30" alt="User" class="user-avatar">
+                            <span id="username">John Doe</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="user-dropdown-menu">
+                            <a href="profile.html" class="dropdown-item">
+                                <i class="fas fa-user"></i> My Profile
+                            </a>
+                            <a href="orders.html" class="dropdown-item">
+                                <i class="fas fa-box"></i> My Orders
+                            </a>
+                            <a href="wishlist.html" class="dropdown-item">
+                                <i class="fas fa-heart"></i> Wishlist
+                                <span class="wishlist-count">0</span>
+                            </a>
+                            <a href="settings.html" class="dropdown-item">
+                                <i class="fas fa-cog"></i> Settings
+                            </a>
+                            <hr>
+                            <a href="#" class="dropdown-item" onclick="logout()">
+                                <i class="fas fa-sign-out-alt"></i> Logout
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <button class="mobile-menu-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+    </nav>
+
+    <!-- Contact Header -->
+    <header class="contact-header">
+        <div class="container">
+            <div class="contact-header-content">
+                <h1><i class="fas fa-headset"></i> Contact Us</h1>
+                <p class="subtitle">We're here to help! Reach out to us through any of the channels below.</p>
+                
+                <div class="contact-stats">
+                    <div class="stat-item">
+                        <i class="fas fa-clock"></i>
+                        <div>
+                            <div class="stat-value">24/7</div>
+                            <div class="stat-label">Support Available</div>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <i class="fas fa-reply"></i>
+                        <div>
+                            <div class="stat-value">2 hours</div>
+                            <div class="stat-label">Avg Response Time</div>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <i class="fas fa-smile"></i>
+                        <div>
+                            <div class="stat-value">98%</div>
+                            <div class="stat-label">Satisfaction Rate</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+  
+            <!-- Quick Help Section -->
+            <section class="quick-help">
+                <div class="section-header">
+                    <h2><i class="fas fa-question-circle"></i> Quick Help</h2>
+                    <p>Find quick answers to common questions</p>
+                </div>
+                
+                <div class="help-grid">
+                    <div class="help-card">
+                        <div class="help-icon">
+                            <i class="fas fa-shipping-fast"></i>
+                        </div>
+                        <h3>Order Tracking</h3>
+                        <p>Track your order status, shipping updates, and delivery estimates.</p>
+                        <a href="track-order.html" class="help-link">Track Order <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                    
+                    <div class="help-card">
+                        <div class="help-icon">
+                            <i class="fas fa-exchange-alt"></i>
+                        </div>
+                        <h3>Returns & Refunds</h3>
+                        <p>Learn about our return policy and how to get a refund.</p>
+                        <a href="returns.html" class="help-link">Return Center <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                    
+                    <div class="help-card">
+                        <div class="help-icon">
+                            <i class="fas fa-file-alt"></i>
+                        </div>
+                        <h3>FAQs</h3>
+                        <p>Browse frequently asked questions about shopping with us.</p>
+                        <a href="faq.html" class="help-link">View FAQs <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Contact Form Section -->
+            <section class="contact-form-section">
+                <div class="contact-form-wrapper">
+                    <div class="form-header">
+                        <h2><i class="fas fa-envelope"></i> Send us a Message</h2>
+                        <p>Fill out the form below and we'll get back to you within 2 hours</p>
+                    </div>
+                    
+                    <form id="contact-form" class="contact-form">
+                        <div class="form-group">
+                            <label for="name">
+                                <i class="fas fa-user"></i> Full Name *
+                            </label>
+                            <input type="text" id="name" name="name" required 
+                                   placeholder="Enter your full name">
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="email">
+                                    <i class="fas fa-envelope"></i> Email Address *
+                                </label>
+                                <input type="email" id="email" name="email" required 
+                                       placeholder="you@example.com">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="phone">
+                                    <i class="fas fa-phone"></i> Phone Number
+                                </label>
+                                <input type="tel" id="phone" name="phone" 
+                                       placeholder="+92 0123456789">
+                            </div>
+                        </div>
+                        
+                       
+                        <div class="form-group">
+                            <label for="order-number">
+                                <i class="fas fa-receipt"></i> Order Number (if applicable)
+                            </label>
+                            <input type="text" id="order-number" name="order_number" 
+                                   placeholder="e.g., ORD-123456">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">
+                                <i class="fas fa-comment"></i> Message *
+                            </label>
+                            <textarea id="message" name="message" rows="6" required 
+                                      placeholder="Please describe your issue or question in detail..."></textarea>
+                        </div>
+                        
+                        <div class="form-group file-upload">
+                            <label for="attachment">
+                                <i class="fas fa-paperclip"></i> Attach Files (Optional)
+                            </label>
+                            <div class="upload-area" id="upload-area">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                <p>Drop files here or click to upload</p>
+                                <small>Max file size: 5MB • Supported: JPG, PNG, PDF</small>
+                                <input type="file" id="attachment" name="attachment" 
+                                       accept=".jpg,.jpeg,.png,.pdf" multiple>
+                            </div>
+                            <div id="file-list" class="file-list"></div>
+                        </div>
+                        
+                        <div class="form-group checkbox">
+                            <input type="checkbox" id="newsletter" name="newsletter">
+                            <label for="newsletter">
+                                Subscribe to our newsletter for updates and exclusive offers
+                            </label>
+                        </div>
+                        
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary btn-large">
+                                <i class="fas fa-paper-plane"></i> Send Message
+                            </button>
+                            <button type="reset" class="btn btn-outline">
+                                <i class="fas fa-redo"></i> Clear Form
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                
+                <div class="contact-info-sidebar">
+                    <div class="info-card">
+                        <div class="info-header">
+                            <h3><i class="fas fa-phone-alt"></i> Call Us</h3>
+                            <span class="info-badge">Available 24/7</span>
+                        </div>
+                        <div class="info-content">
+                            <div class="phone-number">
+                                <a href="tel:+92 0123456789">+92 0123456789</a>
+                                <small>Primary Support</small>
+                            </div>
+                            <div class="phone-number">
+                                <a href="tel:+92 0123456789">+92 0123456789</a>
+                                <small>Business Inquiries</small>
+                            </div>
+                            <div class="call-hours">
+                                <p><strong>Call Center Hours:</strong></p>
+                                <p>Monday - Friday: 6AM - 10PM PST</p>
+                                <p>Saturday - Sunday: 8AM - 8PM PST</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="info-card">
+                        <div class="info-header">
+                            <h3><i class="fas fa-envelope"></i> Email Us</h3>
+                            <span class="info-badge">Response in 2 hours</span>
+                        </div>
+                        <div class="info-content">
+                            <div class="email-address">
+                                <a href="mailto:support@shopeasy.com">support@shopcart.com</a>
+                                <small>General Inquiries</small>
+                            </div>
+                            <div class="email-address">
+                                <a href="mailto:orders@shopeasy.com">orders@shopcart.com</a>
+                                <small>Order Support</small>
+                            </div>
+                            <div class="email-address">
+                                <a href="mailto:business@shopeasy.com">business@shopcart.com</a>
+                                <small>Business Partnerships</small>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="info-card">
+                        <div class="info-header">
+                            <h3><i class="fas fa-map-marker-alt"></i> Visit Us</h3>
+                            <span class="info-badge">Headquarters</span>
+                        </div>
+                        <div class="info-content">
+                            <div class="address">
+                                <p><strong>ShopCart Inc.</strong></p>
+                                <p>Islamabad, Pakistan</p>
+            
+                            </div>
+                            <div class="office-hours">
+                                <p><strong>Office Hours:</strong></p>
+                                <p>Monday - Friday: 9AM - 6PM PST</p>
+                                <p>By appointment only</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="info-card">
+                        <div class="info-header">
+                            <h3><i class="fas fa-comment-dots"></i> Live Chat</h3>
+                            <span class="info-badge">Instant Response</span>
+                        </div>
+                        <div class="info-content">
+                            <p>Chat with our support team for immediate assistance.</p>
+                            <button class="btn btn-primary btn-block live-chat-btn">
+                                <i class="fas fa-comments"></i> Start Live Chat
+                            </button>
+                            <p class="chat-availability">
+                                <i class="fas fa-circle online"></i> 
+                                12 agents available now
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- FAQ Section -->
+            <section class="faq-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-question-circle"></i> Frequently Asked Questions</h2>
+                    <p>Quick answers to common questions</p>
+                </div>
+                
+                <div class="faq-accordion">
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span>How long does shipping take?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Standard shipping typically takes 3-7 business days. Express shipping (1-2 business days) and overnight shipping are also available at checkout. Delivery times may vary based on your location and product availability.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span>What is your return policy?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>We offer a 30-day return policy for most items. Products must be in original condition with tags attached. Some items like electronics have a 14-day return window. Visit our Returns Center for complete details and to initiate a return.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span>How do I track my order?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Once your order ships, you'll receive a tracking number via email. You can also track your order by logging into your account and visiting the "My Orders" section. Live tracking updates are available for most shipments.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span>Do you ship internationally?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Yes, we ship to over 50 countries worldwide. International shipping costs and delivery times vary by location. Duties and taxes may apply depending on your country's import regulations.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span>How can I change or cancel my order?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Orders can be changed or cancelled within 1 hour of placement. After that, please contact our support team immediately. Once an order has shipped, it cannot be cancelled but can be returned upon delivery.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="faq-footer">
+                    <p>Didn't find what you're looking for? <a href="faq.html">Browse all FAQs</a></p>
+                </div>
+            </section>
+    
+
+    <!-- JavaScript Files -->
+    <script src="js/main.js"></script>
+    <script src="js/contact.js"></script>
+    
+    <script>
+        // Mobile menu toggle
+        document.querySelector('.mobile-menu-toggle')?.addEventListener('click', function() {
+            const navLinks = document.querySelector('.nav-links');
+            const icon = this.querySelector('i');
+            
+            navLinks.classList.toggle('active');
+            
+            if (navLinks.classList.contains('active')) {
+                icon.className = 'fas fa-times';
+            } else {
+                icon.className = 'fas fa-bars';
+            }
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const navLinks = document.querySelector('.nav-links');
+            const mobileToggle = document.querySelector('.mobile-menu-toggle');
+            
+            if (navLinks.classList.contains('active') && 
+                !event.target.closest('.nav-links') && 
+                !event.target.closest('.mobile-menu-toggle')) {
+                navLinks.classList.remove('active');
+                mobileToggle.querySelector('i').className = 'fas fa-bars';
+            }
+        });
+
+        // User dropdown
+        const userDropdownToggle = document.querySelector('.user-dropdown-toggle');
+        const userDropdownMenu = document.querySelector('.user-dropdown-menu');
+        
+        if (userDropdownToggle && userDropdownMenu) {
+            userDropdownToggle.addEventListener('click', function(e) {
+                e.stopPropagation();
+                userDropdownMenu.classList.toggle('show');
+            });
+
+            document.addEventListener('click', function() {
+                userDropdownMenu.classList.remove('show');
+            });
+
+            userDropdownMenu.addEventListener('click', function(e) {
+                e.stopPropagation();
+            });
+        }
+
+        // Search functionality
+        const searchInput = document.querySelector('.search-bar input');
+        const searchButton = document.querySelector('.search-bar button');
+        
+        if (searchInput && searchButton) {
+            searchButton.addEventListener('click', performSearch);
+            searchInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    performSearch();
+                }
+            });
+            
+            function performSearch() {
+                const query = searchInput.value.trim();
+                if (query) {
+                    window.location.href = `products.html?search=${encodeURIComponent(query)}`;
+                }
+            }
+        }
+
+        // Update cart count
+        if (localStorage.getItem('cartCount')) {
+            document.querySelector('.cart-count').textContent = localStorage.getItem('cartCount');
+        }
+
+        // Live chat functionality
+        const liveChatBtns = document.querySelectorAll('.live-chat-btn');
+        const chatToggle = document.querySelector('.chat-toggle');
+        const chatWindow = document.querySelector('.chat-window');
+        const chatClose = document.querySelector('.chat-close');
+        
+        function toggleChat() {
+            chatWindow.classList.toggle('active');
+            chatToggle.classList.toggle('active');
+        }
+        
+        if (liveChatBtns.length > 0) {
+            liveChatBtns.forEach(btn => {
+                btn.addEventListener('click', toggleChat);
+            });
+        }
+        
+        if (chatToggle) {
+            chatToggle.addEventListener('click', toggleChat);
+        }
+        
+        if (chatClose) {
+            chatClose.addEventListener('click', toggleChat);
+        }
+
+        // Set active nav link
+        const currentPage = window.location.pathname.split('/').pop();
+        const navLinks = document.querySelectorAll('.nav-links a');
+        
+        navLinks.forEach(link => {
+            if (link.getAttribute('href') === currentPage) {
+                link.classList.add('active');
+            }
+        });
+    </script>
+</body>
+</html>

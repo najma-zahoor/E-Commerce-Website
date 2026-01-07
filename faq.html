@@ -1,0 +1,1628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQs | ShopCart Help Center</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="faq.css">
+    <style>
+        /* ===== CSS VARIABLES ===== */
+        :root {
+            --primary: #3498db;
+            --primary-dark: #2980b9;
+            --primary-light: #5dade2;
+            --secondary: #2c3e50;
+            --success: #27ae60;
+            --danger: #e74c3c;
+            --warning: #f39c12;
+            --light: #f8f9fa;
+            --dark: #2c3e50;
+            --gray: #95a5a6;
+            --light-gray: #ecf0f1;
+            --border: #ddd;
+            --shadow: 0 2px 15px rgba(0,0,0,0.1);
+            --shadow-lg: 0 5px 25px rgba(0,0,0,0.15);
+            --radius: 8px;
+            --transition: all 0.3s ease;
+            --gradient: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ===== HEADER ===== */
+        .header {
+            background: white;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo i {
+            color: var(--secondary);
+        }
+
+        .logo span {
+            color: var(--secondary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--dark);
+            font-weight: 600;
+            position: relative;
+            padding: 5px 0;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--primary);
+        }
+
+        .nav-links a.active:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--primary);
+        }
+
+        .nav-icons {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .nav-icon {
+            font-size: 1.2rem;
+            color: var(--dark);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-icon:hover {
+            color: var(--primary);
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--danger);
+            color: white;
+            font-size: 0.7rem;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            display: none;
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--dark);
+        }
+
+        /* ===== HELP HERO ===== */
+        .help-hero {
+            background: var(--gradient);
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .help-hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            font-weight: 800;
+        }
+
+        .help-hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 40px;
+            opacity: 0.9;
+        }
+
+        .search-box {
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 18px 25px;
+            padding-right: 70px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .search-input:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(255,255,255,0.3);
+        }
+
+        .search-btn {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .search-btn:hover {
+            background: var(--primary-dark);
+            transform: rotate(15deg);
+        }
+
+        /* ===== FAQ CONTAINER ===== */
+        .faq-container {
+            padding: 80px 0;
+        }
+
+        .faq-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .faq-header h2 {
+            font-size: 2.5rem;
+            color: var(--dark);
+            margin-bottom: 15px;
+        }
+
+        .faq-header p {
+            color: var(--gray);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* ===== FAQ CATEGORIES ===== */
+        .faq-categories {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 50px;
+            flex-wrap: wrap;
+        }
+
+        .category-btn {
+            padding: 12px 25px;
+            background: white;
+            border: 2px solid var(--border);
+            border-radius: 50px;
+            font-weight: 600;
+            color: var(--dark);
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .category-btn:hover,
+        .category-btn.active {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+        }
+
+        .category-btn i {
+            font-size: 1.1rem;
+        }
+
+        /* ===== FAQ CONTENT ===== */
+        .faq-content {
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 40px;
+        }
+
+        @media (max-width: 992px) {
+            .faq-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ===== FAQ ACCORDION ===== */
+        .faq-accordion {
+            background: white;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+
+        .faq-section {
+            margin-bottom: 30px;
+        }
+
+        .faq-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .section-header {
+            padding: 25px 30px;
+            background: var(--light-gray);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .section-header h3 {
+            color: var(--dark);
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-header i {
+            color: var(--primary);
+        }
+
+        .faq-item {
+            border-bottom: 1px solid var(--light-gray);
+            transition: var(--transition);
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+
+        .faq-question {
+            padding: 20px 30px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: var(--transition);
+        }
+
+        .faq-question:hover {
+            background: rgba(52, 152, 219, 0.05);
+        }
+
+        .faq-question h4 {
+            color: var(--dark);
+            font-size: 1.1rem;
+            font-weight: 600;
+            flex: 1;
+            margin-right: 20px;
+        }
+
+        .faq-toggle {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--light-gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            flex-shrink: 0;
+        }
+
+        .faq-toggle i {
+            transition: var(--transition);
+            color: var(--dark);
+        }
+
+        .faq-item.active .faq-toggle {
+            background: var(--primary);
+        }
+
+        .faq-item.active .faq-toggle i {
+            color: white;
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            padding: 0 30px;
+            max-height: 0;
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .faq-item.active .faq-answer {
+            padding: 0 30px 30px;
+            max-height: 1000px;
+        }
+
+        .faq-answer p {
+            color: var(--gray);
+            margin-bottom: 15px;
+        }
+
+        .faq-answer ul {
+            list-style-type: disc;
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        .faq-answer li {
+            margin-bottom: 8px;
+            color: var(--gray);
+        }
+
+        .faq-answer strong {
+            color: var(--dark);
+            font-weight: 600;
+        }
+
+        /* ===== FAQ SIDEBAR ===== */
+        .faq-sidebar {
+            background: white;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 30px;
+            height: fit-content;
+            position: sticky;
+            top: 100px;
+        }
+
+        .sidebar-section {
+            margin-bottom: 30px;
+        }
+
+        .sidebar-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .sidebar-section h3 {
+            color: var(--dark);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--light-gray);
+            font-size: 1.2rem;
+        }
+
+        .help-links {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .help-link {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            background: var(--light);
+            border-radius: var(--radius);
+            color: var(--dark);
+            transition: var(--transition);
+        }
+
+        .help-link:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateX(5px);
+        }
+
+        .help-link i {
+            font-size: 1.2rem;
+            width: 20px;
+        }
+
+        .contact-info {
+            background: var(--gradient);
+            color: white;
+            padding: 25px;
+            border-radius: var(--radius);
+            text-align: center;
+        }
+
+        .contact-info h4 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+        }
+
+        .contact-info p {
+            margin-bottom: 20px;
+            opacity: 0.9;
+        }
+
+        .contact-btn {
+            display: inline-block;
+            background: white;
+            color: var(--primary);
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .contact-btn:hover {
+            background: var(--light-gray);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+        }
+
+        /* ===== CONTACT SECTION ===== */
+        .contact-section {
+            background: white;
+            padding: 80px 0;
+            margin-top: 60px;
+            border-top: 1px solid var(--border);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .contact-methods {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .contact-method {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+        }
+
+        .method-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .method-content h4 {
+            color: var(--dark);
+            margin-bottom: 10px;
+        }
+
+        .method-content p {
+            color: var(--gray);
+        }
+
+        .contact-form {
+            background: var(--light);
+            padding: 40px;
+            border-radius: var(--radius);
+        }
+
+        .contact-form h3 {
+            color: var(--dark);
+            margin-bottom: 25px;
+            font-size: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            font-family: inherit;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+        }
+
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .btn-submit {
+            background: var(--primary);
+            color: white;
+            padding: 14px 30px;
+            border-radius: var(--radius);
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-submit:hover {
+            background: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            background: var(--secondary);
+            color: white;
+            padding: 80px 0 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+
+        .footer-column h3 {
+            color: white;
+            margin-bottom: 25px;
+            font-size: 1.3rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h3:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background: var(--primary);
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: #bbb;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .footer-links a:hover {
+            color: white;
+            transform: translateX(5px);
+        }
+
+        .contact-info-list li {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            color: #bbb;
+        }
+
+        .contact-info-list i {
+            margin-right: 15px;
+            color: var(--primary);
+            font-size: 1.2rem;
+            margin-top: 5px;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-icons a {
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .social-icons a:hover {
+            background: var(--primary);
+            transform: translateY(-5px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #bbb;
+            font-size: 0.9rem;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background: white;
+                flex-direction: column;
+                align-items: center;
+                padding: 20px 0;
+                box-shadow: var(--shadow);
+                transform: translateY(-150%);
+                transition: var(--transition);
+                z-index: 999;
+            }
+
+            .nav-links.active {
+                transform: translateY(0);
+            }
+
+            .nav-links li {
+                margin: 15px 0;
+            }
+
+            .help-hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .help-hero p {
+                font-size: 1rem;
+            }
+
+            .faq-header h2 {
+                font-size: 2rem;
+            }
+
+            .category-btn {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+
+            .faq-question h4 {
+                font-size: 1rem;
+            }
+
+            .contact-section {
+                padding: 50px 0;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .help-hero {
+                padding: 70px 0;
+            }
+
+            .help-hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .faq-header h2 {
+                font-size: 1.8rem;
+            }
+
+            .faq-question {
+                padding: 15px 20px;
+            }
+
+            .faq-answer {
+                padding: 0 20px;
+            }
+
+            .faq-item.active .faq-answer {
+                padding: 0 20px 20px;
+            }
+
+            .contact-form {
+                padding: 25px;
+            }
+        }
+
+        /* ===== ANIMATIONS ===== */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .faq-item {
+            animation: fadeIn 0.3s ease;
+        }
+
+        /* ===== SCROLL TO TOP ===== */
+        .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            z-index: 999;
+            box-shadow: var(--shadow);
+        }
+
+        .scroll-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .scroll-top:hover {
+            background: var(--primary-dark);
+            transform: translateY(-3px);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Help Hero Section -->
+    <section class="help-hero">
+        <div class="container">
+            <h1>How can we help you?</h1>
+            <p>Find answers to frequently asked questions or contact our support team for further assistance.</p>
+            <div class="search-box">
+                <input type="text" class="search-input" placeholder="Search for answers..." id="faqSearch">
+                <button class="search-btn" id="searchBtn">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Container -->
+    <div class="container faq-container">
+        <!-- FAQ Header -->
+        <div class="faq-header">
+            <h2>Frequently Asked Questions</h2>
+            <p>Browse through our most common questions and answers</p>
+        </div>
+
+        <!-- FAQ Categories -->
+        <div class="faq-categories">
+            <button class="category-btn active" data-category="all">
+                <i class="fas fa-question-circle"></i> All Questions
+            </button>
+            <button class="category-btn" data-category="shipping">
+                <i class="fas fa-shipping-fast"></i> Shipping & Delivery
+            </button>
+            <button class="category-btn" data-category="returns">
+                <i class="fas fa-undo"></i> Returns & Refunds
+            </button>
+            <button class="category-btn" data-category="orders">
+                <i class="fas fa-shopping-bag"></i> Orders & Payment
+            </button>
+            <button class="category-btn" data-category="account">
+                <i class="fas fa-user"></i> Account & Security
+            </button>
+            <button class="category-btn" data-category="products">
+                <i class="fas fa-box"></i> Products & Services
+            </button>
+        </div>
+
+        <!-- FAQ Content -->
+        <div class="faq-content">
+            <!-- FAQ Accordion -->
+            <div class="faq-accordion" id="faqAccordion">
+                <!-- Shipping Section -->
+                <div class="faq-section" data-category="shipping">
+                    <div class="section-header">
+                        <h3><i class="fas fa-shipping-fast"></i> Shipping & Delivery</h3>
+                    </div>
+                    
+                    <div class="faq-item" data-question="shipping">
+                        <div class="faq-question">
+                            <h4>How long does shipping take?</h4>
+                            <div class="faq-toggle">
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Shipping times vary based on your location and the shipping method selected:</p>
+                            <ul>
+                                <li><strong>Standard Shipping:</strong> 5-7 business days</li>
+                                <li><strong>Express Shipping:</strong> 2-3 business days</li>
+                                <li><strong>Next Day Delivery:</strong> 1 business day (order before 2 PM)</li>
+                            </ul>
+                            <p>International shipping typically takes 7-14 business days depending on the destination.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" data-question="shipping">
+                        <div class="faq-question">
+                            <h4>Do you offer free shipping?</h4>
+                            <div class="faq-toggle">
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Yes! We offer free standard shipping on all orders over $50 within the United States.</p>
+                            <p>For international orders, free shipping is available on orders over $100.</p>
+                            <p>During promotional periods, we may offer free shipping on all orders regardless of the total amount.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" data-question="shipping">
+                        <div class="faq-question">
+                            <h4>How can I track my order?</h4>
+                            <div class="faq-toggle">
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Once your order ships, you'll receive a tracking number via email. You can use this tracking number to:</p>
+                            <ul>
+                                <li>Track your order on our website in your account section</li>
+                                <li>Track directly with the carrier (UPS, FedEx, or USPS)</li>
+                                <li>Use our mobile app for real-time updates</li>
+                            </ul>
+                            <p>If you haven't received a tracking number within 2 business days, please contact our support team.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" data-question="shipping">
+                        <div class="faq-question">
+                            <h4>What countries do you ship to?</h4>
+                            <div class="faq-toggle">
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                        </div>
+                        <div class="faq-answer">
+                            <p>We currently ship to over 50 countries worldwide including:</p>
+                            <ul>
+                                <li>United States</li>
+                                <li>Canada</li>
+                                <li>United Kingdom</li>
+                                <li>Australia</li>
+                                <li>European Union countries</li>
+                                <li>Japan</li>
+                                <li>South Korea</li>
+                                <li>And many more...</li>
+                            </ul>
+                            <p>During checkout, you can see if we ship to your country. Some restrictions may apply to certain products.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Returns Section -->
+                <div class="faq-section" data-category="returns">
+                    <div class="section-header">
+                        <h3><i class="fas fa-undo"></i> Returns & Refunds</h3>
+                    </div>
+
+                    <div class="faq-item" data-question="returns">
+                        <div class="faq-question">
+                            <h4>What is your return policy?</h4>
+                            <div class="faq-toggle">
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                        </div>
+                        <div class="faq-answer">
+                            <p>We offer a 30-day return policy for most items. To be eligible for a return:</p>
+                            <ul>
+                                <li>Item must be in original condition</li>
+                                <li>All tags and packaging must be intact</li>
+                                <li>Proof of purchase is required</li>
+                            </ul>
+                            <p><strong>Note:</strong> Some items are non-returnable including:</p>
+                            <ul>
+                                <li>Personalized/customized products</li>
+                                <li>Downloadable software</li>
+                                <li>Gift cards</li>
+                                <li>Perishable goods</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" data-question="returns">
+                        <div class="faq-question">
+                            <h4>How do I return an item?</h4>
+                            <div class="faq-toggle">
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Follow these simple steps to return an item:</p>
+                            <ol>
+                                <li>Log into your account and go to "Order History"</li>
+                                <li>Select the item you want to return</li>
+                                <li>Choose a return reason and follow the instructions</li>
+                                <li>Print the return label provided</li>
+                                <li>Package the item securely with the return label</li>
+                                <li>Drop off at any authorized carrier location</li>
+                            </ol>
+                            <p>Once we receive your return, we'll process your refund within 5-7 business days.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" data-question="returns">
+                        <div class="faq-question">
+                            <h4>How long do refunds take?</h4>
+                            <div class="faq-toggle">
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Refund processing times vary based on your payment method:</p>
+                            <ul>
+                                <li><strong>Credit/Debit Cards:</strong> 5-10 business days</li>
+                                <li><strong>PayPal:</strong> 3-5 business days</li>
+                                <li><strong>Apple Pay/Google Pay:</strong> 3-7 business days</li>
+                                <li><strong>Bank Transfer:</strong> 7-14 business days</li>
+                            </ul>
+                            <p>The refund timeline starts from when we receive your returned item at our warehouse.</p>
+                            <p><strong>Note:</strong> Your bank may take additional time to post the refund to your account.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Orders Section -->
+                <div class="faq-section" data-category="orders">
+                    <div class="section-header">
+                        <h3><i class="fas fa-shopping-bag"></i> Orders & Payment</h3>
+                    </div>
+
+                    <div class="faq-item" data-question="orders">
+                        <div class="faq-question">
+                            <h4>How can I cancel or modify my order?</h4>
+                            <div class="faq-toggle">
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                        </div>
+                        <div class="faq-answer">
+                            <p>You can cancel or modify your order within 1 hour of placing it:</p>
+                            <ul>
+                                <li><strong>To cancel:</strong> Go to your order history and click "Cancel Order"</li>
+                                <li><strong>To modify:</strong> Cancel the order and place a new one with correct details</li>
+                            </ul>
+                            <p><strong>Important:</strong> Once your order has been processed for shipping, it cannot be canceled or modified.</p>
+                            <p>If you need to change the shipping address after the 1-hour window, please contact our support team immediately.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" data-question="orders">
+                        <div class="faq-question">
+                            <h4>What payment methods do you accept?</h4>
+                            <div class="faq-toggle">
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                        </div>
+                        <div class="faq-answer">
+                            <p>We accept a wide variety of payment methods:</p>
+                            <ul>
+                                <li>All major credit cards (Visa, MasterCard, American Express, Discover)</li>
+                                <li>Debit cards</li>
+                                <li>PayPal</li>
+                                <li>Apple Pay</li>
+                                <li>Google Pay</li>
+                                <li>ShopCart Gift Cards</li>
+                                <li>ShopPay (our payment plan option)</li>
+                            </ul>
+                            <p>All payments are processed securely using SSL encryption and PCI DSS compliance.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" data-question="orders">
+                        <div class="faq-question">
+                            <h4>Is my payment information secure?</h4>
+                            <div class="faq-toggle">
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Yes! We take security very seriously:</p>
+                            <ul>
+                                <li>SSL encryption on all pages</li>
+                                <li>PCI DSS compliant payment processing</li>
+                                <li>No sensitive payment data is stored on our servers</li>
+                                <li>Regular security audits and penetration testing</li>
+                                <li>Two-factor authentication available for accounts</li>
+                            </ul>
+                            <p>We use industry-leading payment processors to ensure your information is protected. You can also enable additional security features in your account settings.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Account Section -->
+                <div class="faq-section" data-category="account">
+                    <div class="section-header">
+                        <h3><i class="fas fa-user"></i> Account & Security</h3>
+                    </div>
+
+                    <div class="faq-item" data-question="account">
+                        <div class="faq-question">
+                            <h4>How do I reset my password?</h4>
+                            <div class="faq-toggle">
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                        </div>
+                        <div class="faq-answer">
+                            <p>To reset your password:</p>
+                            <ol>
+                                <li>Go to the login page</li>
+                                <li>Click "Forgot Password"</li>
+                                <li>Enter the email address associated with your account</li>
+                                <li>Check your email for the password reset link</li>
+                                <li>Click the link and create a new password</li>
+                            </ol>
+                            <p>If you don't receive the email within 10 minutes:</p>
+                            <ul>
+                                <li>Check your spam/junk folder</li>
+                                <li>Make sure you're checking the correct email address</li>
+                                <li>Try resending the password reset email</li>
+                                <li>Contact support if you still have issues</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" data-question="account">
+                        <div class="faq-question">
+                            <h4>How do I update my account information?</h4>
+                            <div class="faq-toggle">
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                        </div>
+                        <div class="faq-answer">
+                            <p>To update your account information:</p>
+                            <ol>
+                                <li>Log into your account</li>
+                                <li>Go to "Account Settings"</li>
+                                <li>Click on the section you want to update:
+                                    <ul>
+                                        <li><strong>Personal Info:</strong> Name, email, phone number</li>
+                                        <li><strong>Password:</strong> Change your password</li>
+                                        <li><strong>Addresses:</strong> Shipping and billing addresses</li>
+                                        <li><strong>Preferences:</strong> Email notifications, language, currency</li>
+                                    </ul>
+                                </li>
+                                <li>Make your changes and click "Save"</li>
+                            </ol>
+                            <p><strong>Note:</strong> Changing your email address requires verification through the new email.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Products Section -->
+                <div class="faq-section" data-category="products">
+                    <div class="section-header">
+                        <h3><i class="fas fa-box"></i> Products & Services</h3>
+                    </div>
+
+                    <div class="faq-item" data-question="products">
+                        <div class="faq-question">
+                            <h4>What is your warranty policy?</h4>
+                            <div class="faq-toggle">
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Our warranty policy varies by product category:</p>
+                            <ul>
+                                <li><strong>Electronics:</strong> 1-year manufacturer warranty</li>
+                                <li><strong>Home Appliances:</strong> 2-year warranty</li>
+                                <li><strong>Clothing:</strong> No warranty, but 30-day return policy</li>
+                                <li><strong>Accessories:</strong> 6-month warranty</li>
+                            </ul>
+                            <p>Warranty coverage includes manufacturing defects but does not cover:</p>
+                            <ul>
+                                <li>Accidental damage</li>
+                                <li>Misuse or improper handling</li>
+                                <li>Normal wear and tear</li>
+                                <li>Unauthorized repairs or modifications</li>
+                            </ul>
+                            <p>For warranty claims, please contact our support team with your order number and details of the issue.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" data-question="products">
+                        <div class="faq-question">
+                            <h4>Do you offer product installation services?</h4>
+                            <div class="faq-toggle">
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Yes, we offer professional installation services for select products:</p>
+                            <ul>
+                                <li><strong>Home Electronics:</strong> TV mounting, sound system setup</li>
+                                <li><strong>Major Appliances:</strong> Refrigerator, washer, dryer installation</li>
+                                <li><strong>Furniture:</strong> Assembly services</li>
+                                <li><strong>Smart Home Devices:</strong> Installation and setup</li>
+                            </ul>
+                            <p>Installation services are available during checkout for eligible products. Pricing varies based on the product and complexity of installation.</p>
+                            <p>Our certified technicians will schedule an appointment at your convenience and ensure everything is installed correctly.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FAQ Sidebar -->
+            <div class="faq-sidebar">
+                <div class="sidebar-section">
+                    <h3>Quick Help</h3>
+                    <div class="help-links">
+                        <a href="#contact-section" class="help-link">
+                            <i class="fas fa-headset"></i>
+                            <span>Contact Support</span>
+                        </a>
+                        <a href="track-order.html" class="help-link">
+                            <i class="fas fa-truck"></i>
+                            <span>Track Your Order</span>
+                        </a>
+                        <a href="returns.html" class="help-link">
+                            <i class="fas fa-undo"></i>
+                            <span>Start a Return</span>
+                        </a>
+                        <a href="size-guide.html" class="help-link">
+                            <i class="fas fa-ruler"></i>
+                            <span>Size Guide</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="sidebar-section">
+                    <div class="contact-info">
+                        <h4>Need More Help?</h4>
+                        <p>Our support team is available 24/7 to assist you with any questions or concerns.</p>
+                        <a href="#contact-section" class="contact-btn">
+                            <i class="fas fa-envelope"></i> Contact Us
+                        </a>
+                    </div>
+                </div>
+
+                <div class="sidebar-section">
+                    <h3>Popular Topics</h3>
+                    <div class="help-links">
+                        <a href="#" class="help-link" data-search="track order">
+                            <i class="fas fa-search"></i>
+                            <span>How to track my order</span>
+                        </a>
+                        <a href="#" class="help-link" data-search="return policy">
+                            <i class="fas fa-search"></i>
+                            <span>Return policy details</span>
+                        </a>
+                        <a href="#" class="help-link" data-search="change address">
+                            <i class="fas fa-search"></i>
+                            <span>Change shipping address</span>
+                        </a>
+                        <a href="#" class="help-link" data-search="payment methods">
+                            <i class="fas fa-search"></i>
+                            <span>Accepted payment methods</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Section -->
+    <section class="contact-section" id="contact-section">
+        <div class="container">
+            <div class="faq-header">
+                <h2>Still Have Questions?</h2>
+                <p>Contact our support team for personalized assistance</p>
+            </div>
+
+            <div class="contact-grid">
+                <div class="contact-methods">
+                    <div class="contact-method">
+                        <div class="method-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="method-content">
+                            <h4>Call Us</h4>
+                            <p>+92 0123456789<br>Available 24/7</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-method">
+                        <div class="method-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="method-content">
+                            <h4>Email Us</h4>
+                            <p>support@shopcart.com<br>Response within 24 hours</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-method">
+                        <div class="method-icon">
+                            <i class="fas fa-comments"></i>
+                        </div>
+                        <div class="method-content">
+                            <h4>Live Chat</h4>
+                            <p>Available Monday-Friday, 9AM-6PM EST<br>Click the chat icon in the bottom right</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-method">
+                        <div class="method-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="method-content">
+                            <h4>Visit Us</h4>
+                            <p>Islamabad, Pakistan</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-form">
+                    <h3>Send us a Message</h3>
+                    <form id="supportForm">
+                        <div class="form-group">
+                            <label for="name">Full Name</label>
+                            <input type="text" id="name" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <select id="subject" class="form-control" required>
+                                <option value="">Select a topic</option>
+                                <option value="order">Order Question</option>
+                                <option value="shipping">Shipping Issue</option>
+                                <option value="return">Return Request</option>
+                                <option value="product">Product Inquiry</option>
+                                <option value="account">Account Help</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" class="form-control" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="orderNumber">Order Number (Optional)</label>
+                            <input type="text" id="orderNumber" class="form-control">
+                        </div>
+                        <button type="submit" class="btn-submit">
+                            <i class="fas fa-paper-plane"></i> Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Scroll to Top -->
+    <div class="scroll-top" id="scrollTop">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // ===== FAQ MANAGER =====
+        const FAQManager = {
+            currentCategory: 'all',
+            cartCount: 0,
+
+            init() {
+                this.loadCartCount();
+                this.setupAccordion();
+                this.setupCategoryFilter();
+                this.setupSearch();
+                this.setupMobileMenu();
+                this.setupContactForm();
+                this.setupScrollTop();
+                this.setupQuickLinks();
+            },
+
+            loadCartCount() {
+                const savedCart = localStorage.getItem('shopCart');
+                if (savedCart) {
+                    const cart = JSON.parse(savedCart);
+                    this.cartCount = cart.items ? cart.items.reduce((sum, item) => sum + item.quantity, 0) : 0;
+                }
+                this.updateCartDisplay();
+            },
+
+            updateCartDisplay() {
+                const cartCountEl = document.getElementById('cartCount');
+                if (cartCountEl) {
+                    cartCountEl.textContent = this.cartCount;
+                    cartCountEl.style.display = this.cartCount > 0 ? 'flex' : 'none';
+                }
+            },
+
+            setupAccordion() {
+                const faqItems = document.querySelectorAll('.faq-item');
+                
+                faqItems.forEach(item => {
+                    const question = item.querySelector('.faq-question');
+                    const toggle = item.querySelector('.faq-toggle');
+                    
+                    question.addEventListener('click', () => {
+                        const isActive = item.classList.contains('active');
+                        
+                        // Close all items
+                        faqItems.forEach(i => i.classList.remove('active'));
+                        
+                        // Open clicked item if it wasn't active
+                        if (!isActive) {
+                            item.classList.add('active');
+                        }
+                    });
+                    
+                    toggle.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        item.classList.toggle('active');
+                    });
+                });
+            },
+
+            setupCategoryFilter() {
+                const categoryButtons = document.querySelectorAll('.category-btn');
+                const faqSections = document.querySelectorAll('.faq-section');
+                
+                categoryButtons.forEach(button => {
+                    button.addEventListener('click', () => {
+                        const category = button.dataset.category;
+                        
+                        // Update active button
+                        categoryButtons.forEach(btn => btn.classList.remove('active'));
+                        button.classList.add('active');
+                        
+                        this.currentCategory = category;
+                        this.filterFAQ(category);
+                    });
+                });
+            },
+
+            filterFAQ(category) {
+                const faqSections = document.querySelectorAll('.faq-section');
+                const allFaqItems = document.querySelectorAll('.faq-item');
+                
+                // Close all FAQ items when filtering
+                allFaqItems.forEach(item => item.classList.remove('active'));
+                
+                if (category === 'all') {
+                    // Show all sections
+                    faqSections.forEach(section => {
+                        section.style.display = 'block';
+                    });
+                } else {
+                    // Show only selected category
+                    faqSections.forEach(section => {
+                        if (section.dataset.category === category) {
+                            section.style.display = 'block';
+                        } else {
+                            section.style.display = 'none';
+                        }
+                    });
+                }
+            },
+
+            setupSearch() {
+                const searchInput = document.getElementById('faqSearch');
+                const searchBtn = document.getElementById('searchBtn');
+                const faqItems = document.querySelectorAll('.faq-item');
+                
+                const performSearch = () => {
+                    const searchTerm = searchInput.value.toLowerCase().trim();
+                    
+                    if (!searchTerm) {
+                        // Show all items when search is empty
+                        faqItems.forEach(item => {
+                            item.style.display = 'block';
+                        });
+                        return;
+                    }
+                    
+                    // Close all FAQ items
+                    faqItems.forEach(item => item.classList.remove('active'));
+                    
+                    // Search in questions and answers
+                    faqItems.forEach(item => {
+                        const question = item.querySelector('.faq-question h4').textContent.toLowerCase();
+                        const answer = item.querySelector('.faq-answer').textContent.toLowerCase();
+                        
+                        if (question.includes(searchTerm) || answer.includes(searchTerm)) {
+                            item.style.display = 'block';
+                            item.classList.add('active'); // Open matching items
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+                    
+                    // Show/hide section headers based on visible items
+                    document.querySelectorAll('.faq-section').forEach(section => {
+                        const visibleItems = section.querySelectorAll('.faq-item[style="display: block"]').length;
+                        section.style.display = visibleItems > 0 ? 'block' : 'none';
+                    });
+                };
+                
+                searchInput.addEventListener('input', performSearch);
+                searchBtn.addEventListener('click', performSearch);
+                
+                // Search on Enter key
+                searchInput.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') {
+                        performSearch();
+                    }
+                });
+            },
+
+            setupMobileMenu() {
+                const menuToggle = document.getElementById('menuToggle');
+                const navLinks = document.getElementById('navLinks');
+                
+                if (menuToggle && navLinks) {
+                    menuToggle.addEventListener('click', () => {
+                        navLinks.classList.toggle('active');
+                        menuToggle.querySelector('i').classList.toggle('fa-bars');
+                        menuToggle.querySelector('i').classList.toggle('fa-times');
+                    });
+
+                    // Close menu when clicking outside
+                    document.addEventListener('click', (e) => {
+                        if (!menuToggle.contains(e.target) && !navLinks.contains(e.target)) {
+                            navLinks.classList.remove('active');
+                            menuToggle.querySelector('i').classList.add('fa-bars');
+                            menuToggle.querySelector('i').classList.remove('fa-times');
+                        }
+                    });
+
+                    // Close menu when clicking on a link
+                    navLinks.querySelectorAll('a').forEach(link => {
+                        link.addEventListener('click', () => {
+                            navLinks.classList.remove('active');
+                            menuToggle.querySelector('i').classList.add('fa-bars');
+                            menuToggle.querySelector('i').classList.remove('fa-times');
+                        });
+                    });
+                }
+            },
+
+            setupContactForm() {
+                const contactForm = document.getElementById('supportForm');
+                if (contactForm) {
+                    contactForm.addEventListener('submit', (e) => {
+                        e.preventDefault();
+                        
+                        // Get form data
+                        const formData = {
+                            name: document.getElementById('name').value,
+                            email: document.getElementById('email').value,
+                            subject: document.getElementById('subject').value,
+                            message: document.getElementById('message').value,
+                            orderNumber: document.getElementById('orderNumber').value
+                        };
+                        
+                        // Show success message
+                        alert('Thank you for your message! Our support team will contact you within 24 hours.');
+                        
+                        // Reset form
+                        contactForm.reset();
+                    });
+                }
+            },
+
+            setupScrollTop() {
+                const scrollTopBtn = document.getElementById('scrollTop');
+                
+                window.addEventListener('scroll', () => {
+                    if (window.pageYOffset > 300) {
+                        scrollTopBtn.classList.add('visible');
+                    } else {
+                        scrollTopBtn.classList.remove('visible');
+                    }
+                });
+
+                scrollTopBtn.addEventListener('click', () => {
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                });
+            },
+
+            setupQuickLinks() {
+                // Setup quick search links
+                document.querySelectorAll('.help-link[data-search]').forEach(link => {
+                    link.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const searchTerm = link.dataset.search;
+                        const searchInput = document.getElementById('faqSearch');
+                        searchInput.value = searchTerm;
+                        searchInput.focus();
+                        
+                        // Trigger search
+                        searchInput.dispatchEvent(new Event('input'));
+                    });
+                });
+            }
+        };
+
+        // ===== INITIALIZE =====
+        document.addEventListener('DOMContentLoaded', () => {
+            FAQManager.init();
+        });
+    </script>
+</body>
+</html>

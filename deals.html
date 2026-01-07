@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hot Deals & Special Offers | ShopCart</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/deals.css">
+</head>
+<body>
+
+<!-- Main Content -->
+<main class="deals-container">
+    <div class="container">
+
+        <!-- Deal Categories -->
+        <section class="deal-categories">
+            <h2><i class="fas fa-filter"></i> Browse Deals by Category</h2>
+            <div class="categories-grid">
+                <a class="category-card"><i class="fas fa-laptop"></i><span>Electronics</span><small>45 deals</small></a>
+                <a class="category-card"><i class="fas fa-tshirt"></i><span>Fashion</span><small>68 deals</small></a>
+                <a class="category-card"><i class="fas fa-home"></i><span>Home & Garden</span><small>32 deals</small></a>
+                <a class="category-card"><i class="fas fa-spa"></i><span>Beauty</span><small>28 deals</small></a>
+                <a class="category-card"><i class="fas fa-basketball-ball"></i><span>Sports</span><small>19 deals</small></a>
+                <a class="category-card"><i class="fas fa-book"></i><span>Books</span><small>24 deals</small></a>
+            </div>
+        </section>
+
+        <!-- Flash Sale -->
+        <section class="flash-sale-section">
+            <div class="section-header">
+                <h2><i class="fas fa-bolt"></i> Flash Sale</h2>
+            </div>
+
+            <div class="flash-sale-products">
+                <div class="flash-product">
+                    <div class="flash-badge">80% OFF</div>
+                    <img src="https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=400">
+                    <div class="flash-product-info">
+                        <h3>Smart Watch Pro</h3>
+                        <span class="current-price">Rs 49.99</span>
+                        <span class="original-price">Rs 249.99</span>
+                        <button class="btn btn-danger btn-block">Buy Now</button>
+                    </div>
+                </div>
+
+                <div class="flash-product">
+                    <div class="flash-badge">70% OFF</div>
+                    <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400">
+                    <div class="flash-product-info">
+                        <h3>Wireless Headphones</h3>
+                        <span class="current-price">Rs 29.99</span>
+                        <span class="original-price">Rs 99.99</span>
+                        <button class="btn btn-danger btn-block">Buy Now</button>
+                    </div>
+                </div>
+
+                <div class="flash-product">
+                    <div class="flash-badge">65% OFF</div>
+                    <img src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?w=400">
+                    <div class="flash-product-info">
+                        <h3>Digital Camera</h3>
+                        <span class="current-price">Rs 149.99</span>
+                        <span class="original-price">Rs 429.99</span>
+                        <button class="btn btn-danger btn-block">Buy Now</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        
+    </div>
+</main>
+
+<script src="js/deals.js"></script>
+
+<script>
+document.querySelector('.mobile-menu-toggle')?.addEventListener('click', function () {
+    document.querySelector('.nav-links').classList.toggle('active');
+});
+</script>
+
+</body>
+</html>

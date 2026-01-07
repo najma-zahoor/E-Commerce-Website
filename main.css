@@ -1,0 +1,398 @@
+// ===== GLOBAL VARIABLES =====
+let cartCount = 0;
+let wishlistCount = 0;
+
+// ===== DOM ELEMENTS =====
+const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+const navLinks = document.getElementById('navLinks');
+const searchInput = document.getElementById('search-input');
+const searchBtn = document.getElementById('search-btn');
+const cartIcon = document.querySelector('.cart-icon');
+const cartCountElement = document.querySelector('.cart-count');
+const backToTopBtn = document.getElementById('back-to-top');
+
+// ===== MOBILE MENU =====
+function initMobileMenu() {
+    if (!mobileMenuBtn || !navLinks) return;
+    
+    mobileMenuBtn.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+        mobileMenuBtn.innerHTML = navLinks.classList.contains('active') 
+            ? '<i class="fas fa-times"></i>' 
+            : '<i class="fas fa-bars"></i>';
+    });
+    
+    // Close menu when clicking outside
+    document.addEventListener('click', (event) => {
+        if (!event.target.closest('.nav-links') && !event.target.closest('.mobile-menu-btn')) {
+            navLinks.classList.remove('active');
+            if (mobileMenuBtn.querySelector('i')) {
+                mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+            }
+        }
+    });
+}
+
+// ===== SEARCH FUNCTIONALITY =====
+function initSearch() {
+    if (!searchInput || !searchBtn) return;
+    
+    const performSearch = () => {
+        const query = searchInput.value.trim();
+        if (query) {
+            // Store search query in sessionStorage
+            sessionStorage.setItem('searchQuery', query);
+            // Redirect to products page
+            window.location.href = 'products.html';
+        }
+    };
+    
+    searchBtn.addEventListener('click', performSearch);
+    searchInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            performSearch();
+        }
+    });
+}
+
+// ===== CART MANAGEMENT =====
+function initCart() {
+    // Load cart from localStorage
+    const savedCart = localStorage.getItem('shopCart');
+    if (savedCart) {
+        const cart = JSON.parse(savedCart);
+        cartCount = cart.reduce((total, item) => total + item.quantity, 0);
+        updateCartCount();
+    }
+    
+    // Update cart count display
+    function updateCartCount() {
+        if (cartCountElement) {
+            cartCountElement.textContent = cartCount;
+            cartCountElement.style.display = cartCount > 0 ? 'flex' : 'none';
+        }
+    }
+    
+    // Add to cart function
+    window.addToCart = function(productId, productName, price, image) {
+        let cart = JSON.parse(localStorage.getItem('shopCart')) || [];
+        
+        // Check if product already in cart
+        const existingItem = cart.find(item => item.id === productId);
+        
+        if (existingItem) {
+            existingItem.quantity += 1;
+        } else {
+            cart.push({
+                id: productId,
+                name: productName,
+                price: price,
+                image: image,
+                quantity: 1
+            });
+        }
+        
+        // Save to localStorage
+        localStorage.setItem('shopCart', JSON.stringify(cart));
+        
+        // Update cart count
+        cartCount = cart.reduce((total, item) => total + item.quantity, 0);
+        updateCartCount();
+        
+        // Show notification
+        showNotification(`${productName} added to cart!`);
+    };
+    
+    // Remove from cart
+    window.removeFromCart = function(productId) {
+        let cart = JSON.parse(localStorage.getItem('shopCart')) || [];
+        cart = cart.filter(item => item.id !== productId);
+        
+        localStorage.setItem('shopCart', JSON.stringify(cart));
+        cartCount = cart.reduce((total, item) => total + item.quantity, 0);
+        updateCartCount();
+        
+        return cart;
+    };
+    
+    // Update quantity
+    window.updateCartQuantity = function(productId, quantity) {
+        let cart = JSON.parse(localStorage.getItem('shopCart')) || [];
+        const item = cart.find(item => item.id === productId);
+        
+        if (item) {
+            item.quantity = quantity;
+            localStorage.setItem('shopCart', JSON.stringify(cart));
+            cartCount = cart.reduce((total, item) => total + item.quantity, 0);
+            updateCartCount();
+        }
+        
+        return cart;
+    };
+    
+    // Get cart total
+    window.getCartTotal = function() {
+        const cart = JSON.parse(localStorage.getItem('shopCart')) || [];
+        return cart.reduce((total, item) => total + (item.price * item.quantity), 0);
+    };
+    
+    updateCartCount();
+}
+
+// ===== NOTIFICATION SYSTEM =====
+function showNotification(message, type = 'success') {
+    // Create notification element
+    const notification = document.createElement('div');
+    notification.className = `notification ${type}`;
+    notification.innerHTML = `
+        <i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-circle'}"></i>
+        <span>${message}</span>
+        <button class="notification-close"><i class="fas fa-times"></i></button>
+    `;
+    
+    // Add to body
+    document.body.appendChild(notification);
+    
+    // Add styles if not already present
+    if (!document.querySelector('#notification-styles')) {
+        const styles = document.createElement('style');
+        styles.id = 'notification-styles';
+        styles.textContent = `
+            .notification {
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: white;
+                padding: 1rem 1.5rem;
+                border-radius: 5px;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                z-index: 9999;
+                animation: slideIn 0.3s ease;
+                border-left: 4px solid #4CAF50;
+            }
+            .notification.error {
+                border-left-color: #ff4757;
+            }
+            .notification i {
+                font-size: 1.2rem;
+            }
+            .notification.success i {
+                color: #4CAF50;
+            }
+            .notification.error i {
+                color: #ff4757;
+            }
+            .notification-close {
+                background: none;
+                border: none;
+                color: #666;
+                cursor: pointer;
+                margin-left: 10px;
+            }
+            @keyframes slideIn {
+                from { transform: translateX(100%); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+        `;
+        document.head.appendChild(styles);
+    }
+    
+    // Close button functionality
+    notification.querySelector('.notification-close').addEventListener('click', () => {
+        notification.remove();
+    });
+    
+    // Auto remove after 3 seconds
+    setTimeout(() => {
+        notification.style.animation = 'slideOut 0.3s ease';
+        setTimeout(() => notification.remove(), 300);
+    }, 3000);
+}
+
+// ===== BACK TO TOP =====
+function initBackToTop() {
+    if (!backToTopBtn) return;
+    
+    window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 300) {
+            backToTopBtn.style.display = 'block';
+        } else {
+            backToTopBtn.style.display = 'none';
+        }
+    });
+    
+    backToTopBtn.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+}
+
+// ===== ACTIVE NAV LINK =====
+function setActiveNavLink() {
+    const currentPage = window.location.pathname.split('/').pop();
+    const navLinks = document.querySelectorAll('.nav-links a');
+    
+    navLinks.forEach(link => {
+        const href = link.getAttribute('href');
+        if (href === currentPage || (currentPage === '' && href === 'index.html')) {
+            link.classList.add('active');
+        } else {
+            link.classList.remove('active');
+        }
+    });
+}
+
+// ===== INITIALIZATION =====
+document.addEventListener('DOMContentLoaded', function() {
+    initMobileMenu();
+    initSearch();
+    initCart();
+    initBackToTop();
+    setActiveNavLink();
+    
+    // Add CSS for back to top button if not present
+    if (!document.querySelector('#back-to-top-styles')) {
+        const styles = document.createElement('style');
+        styles.id = 'back-to-top-styles';
+        styles.textContent = `
+            .back-to-top {
+                position: fixed;
+                bottom: 30px;
+                right: 30px;
+                width: 50px;
+                height: 50px;
+                background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+                color: white;
+                border: none;
+                border-radius: 50%;
+                cursor: pointer;
+                display: none;
+                align-items: center;
+                justify-content: center;
+                font-size: 1.2rem;
+                box-shadow: 0 3px 10px rgba(106, 17, 203, 0.3);
+                z-index: 100;
+                transition: all 0.3s ease;
+            }
+            .back-to-top:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 5px 15px rgba(106, 17, 203, 0.4);
+            }
+        `;
+        document.head.appendChild(styles);
+    }
+});
+
+// ===== PRODUCTS DATA =====
+window.productsData = [
+    {
+        id: 1,
+        name: "iPhone 14 Pro 256GB",
+        description: "Latest Apple iPhone with A16 Bionic chip and Dynamic Island",
+        price: 999.99,
+        discountPrice: 899.99,
+        category: "electronics",
+        brand: "apple",
+        image: "https://images.unsplash.com/photo-1679150583766-569df3fec2a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+        rating: 4.8,
+        reviewCount: 1250,
+        stock: 50,
+        featured: true
+    },
+    {
+        id: 2,
+        name: "Samsung Galaxy S22",
+        description: "Android smartphone with 120Hz display and powerful camera",
+        price: 799.99,
+        discountPrice: 699.99,
+        category: "electronics",
+        brand: "samsung",
+        image: "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+        rating: 4.5,
+        reviewCount: 890,
+        stock: 75,
+        featured: true
+    },
+    {
+        id: 3,
+        name: "Nike Air Max 270",
+        description: "Comfortable running shoes with Air Max cushioning",
+        price: 129.99,
+        category: "fashion",
+        brand: "nike",
+        image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+        rating: 4.3,
+        reviewCount: 450,
+        stock: 200,
+        featured: true
+    },
+    {
+        id: 4,
+        name: "Sony WH-1000XM4",
+        description: "Noise cancelling headphones with industry-leading sound",
+        price: 349.99,
+        discountPrice: 299.99,
+        category: "electronics",
+        brand: "sony",
+        image: "https://images.unsplash.com/photo-1583394838336-acd977736f90?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+        rating: 4.7,
+        reviewCount: 2100,
+        stock: 30,
+        featured: true
+    },
+    {
+        id: 5,
+        name: "Dell XPS 13 Laptop",
+        description: "13-inch laptop with Intel i7 processor and 4K display",
+        price: 1199.99,
+        category: "electronics",
+        brand: "dell",
+        image: "https://images.unsplash.com/photo-1593640408182-31c70c8268f5?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+        rating: 4.6,
+        reviewCount: 780,
+        stock: 25,
+        featured: true
+    },
+    {
+        id: 6,
+        name: "Adidas Ultraboost 22",
+        description: "Running shoes with responsive cushioning",
+        price: 149.99,
+        category: "fashion",
+        brand: "adidas",
+        image: "https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+        rating: 4.4,
+        reviewCount: 320,
+        stock: 150
+    },
+    {
+        id: 7,
+        name: "Apple Watch Series 8",
+        description: "Smart watch with health monitoring features",
+        price: 399.99,
+        category: "electronics",
+        brand: "apple",
+        image: "https://images.unsplash.com/photo-1551816230-ef5deaed4a26?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+        rating: 4.5,
+        reviewCount: 950,
+        stock: 40
+    },
+    {
+        id: 8,
+        name: "Samsung QLED TV 55\"",
+        description: "4K Smart TV with Quantum Dot technology",
+        price: 899.99,
+        discountPrice: 799.99,
+        category: "electronics",
+        brand: "samsung",
+        image: "https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+        rating: 4.6,
+        reviewCount: 620,
+        stock: 20
+    }
+];

@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShopCart | Premium E-Commerce</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+      <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+    <!-- Overlay for dropdowns -->
+    <div class="dropdown-overlay" id="overlay"></div>
+
+    <!-- Header -->
+    <header>
+        <div class="top-bar">
+            <div class="container">🎉 Free shipping on orders over Rs50 | 30-day return policy</div>
+        </div>
+        <div class="main-header">
+            <div class="container header-content">
+                <a  class="logo">Shop<span>Cart</span></a>
+             </div>
+                
+         </div>
+                           
+                    
+            <div class="auth-links">
+                <a href="login.html" class="auth-link">Login</a>
+                <a href="register.html" class="auth-link">Register</a>
+                <a href="cart.html" class="cart-link">
+                    <i class="fas fa-shopping-cart"></i>
+                    Cart
+                 
+                </a>
+            </div>
+                    
+        <nav>
+            <div class="container">
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="products.html">Products</a></li>
+                    <li><a href="categories.html">Categories</a></li>
+                    <li><a href="deals.html">Deals</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container hero-content">
+            <div class="hero-text">
+                <h1>Summer Sale<br>Up to 50% Off</h1>
+                <p>Discover amazing products at incredible prices. Limited time offer on top brands across all categories.</p>
+                <a href="shopenow.html" class="cta-button">Shop Now <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="hero-image">
+                <div class="hero-image">
+             <img src="https://images.unsplash.com/photo-1607082349566-187342175e2f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Online Shopping">
+        </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Featured Categories -->
+        <h2 class="section-title">Shop By Category</h2>
+        <div class="categories">
+            <a href="#" class="category-card">
+                <div class="category-img" style="background: #e3f2fd;">
+                    <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: #1565c0; font-size: 4rem;">
+                        <i class="fas fa-laptop"></i>
+                    </div>
+                </div>
+                <div class="category-info">
+                    <h3>Electronics</h3>
+                    <p>Smartphones, Laptops & more</p>
+                </div>
+            </a>
+            
+            <a href="categories.html" class="category-card">
+                <div class="category-img" style="background: #fce4ec;">
+                    <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: #c2185b; font-size: 4rem;">
+                        <i class="fas fa-tshirt"></i>
+                    </div>
+                </div>
+                <div class="category-info">
+                    <h3>Fashion</h3>
+                    <p>Clothing, Shoes & Accessories</p>
+                </div>
+            </a>
+            
+            <a href="categories.html" class="category-card">
+                <div class="category-img" style="background: #e8f5e9;">
+                    <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: #2e7d32; font-size: 4rem;">
+                        <i class="fas fa-home"></i>
+                    </div>
+                </div>
+                <div class="category-info">
+                    <h3>Home & Kitchen</h3>
+                    <p>Furniture, Appliances & Decor</p>
+                </div>
+            </a>
+            
+            <a href="categories.html" class="category-card">
+                <div class="category-img" style="background: #fff3e0;">
+                    <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: #ef6c00; font-size: 4rem;">
+                        <i class="fas fa-dumbbell"></i>
+                    </div>
+                </div>
+                <div class="category-info">
+                    <h3>Sports & Fitness</h3>
+                    <p>Equipment & Activewear</p>
+                </div>
+            </a>
+        </div>
+
+        <!-- Featured Products -->
+        <h2 class="section-title">Best Sellers</h2>
+        <div class="products-grid">
+            <!-- Product 1 -->
+            <div class="product-card">
+                <span class="product-badge">-25%</span>
+                <div class="product-img" style="background: #f5f5f5;">
+                    <div style="font-size: 3.5rem; color: #555;">📱</div>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Smartphone Pro X</h3>
+                    <p class="product-price">Rs69,999<span class="old-price">Rs89,999</span></p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+            
+            <!-- Product 2 -->
+            <div class="product-card">
+                <span class="product-badge" style="background: #4caf50;">New</span>
+                <div class="product-img" style="background: #f5f5f5;">
+                    <div style="font-size: 3.5rem; color: #555;">🎧</div>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Wireless Headphones</h3>
+                    <p class="product-price">Rs19,999</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+            
+            <!-- Product 3 -->
+            <div class="product-card">
+                <div class="product-img" style="background: #f5f5f5;">
+                    <div style="font-size: 3.5rem; color: #555;">👟</div>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Running Shoes</h3>
+                    <p class="product-price">Rs12,999</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+            
+            <!-- Product 4 -->
+            <div class="product-card">
+                <span class="product-badge">-15%</span>
+                <div class="product-img" style="background: #f5f5f5;">
+                    <div style="font-size: 3.5rem; color: #555;">💻</div>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Ultrabook Laptop</h3>
+                    <p class="product-price">Rs129,999<span class="old-price">Rs149,999</span></p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>ShopCart</h3>
+                    <p>Your one-stop destination for all shopping needs. Quality products, best prices, and exceptional service.</p>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="faq.html">FAQs</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Customer Service</h3>
+                    <ul class="footer-links">
+                        <li><a href="account.html">My Account</a></li>
+                        <li><a href="track-order.html">Track My Order</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Contact Info</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-map-marker-alt"></i> Islamabad, Pakistan</li>
+                        <li><i class="fas fa-phone"></i> +92 0123456789</li>
+                        <li><i class="fas fa-envelope"></i> support@shopcart.com</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 ShopCart. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Sign In Modal (Hidden by default) -->
+    <div id="signInModal" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 30px; border-radius: 15px; box-shadow: 0 20px 60px rgba(0,0,0,0.3); z-index: 1002; min-width: 350px;">
+        <h2 style="margin-bottom: 20px; color: var(--dark);">Sign In</h2>
+        <form id="signInForm">
+            <input type="email" placeholder="Email" style="width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid var(--border); border-radius: 8px;">
+            <input type="password" placeholder="Password" style="width: 100%; padding: 12px; margin-bottom: 20px; border: 1px solid var(--border); border-radius: 8px;">
+            <button type="submit" style="width: 100%; padding: 12px; background: var(--primary); color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer;">Sign In</button>
+        </form>
+        <button onclick="closeModal('signInModal')" style="position: absolute; top: 15px; right: 15px; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--gray);">×</button>
+    </div>
+
+    <script>
+        // DOM Elements
+        const accountIcon = document.getElementById('accountIcon');
+        const wishlistIcon = document.getElementById('wishlistIcon');
+        const cartIcon = document.getElementById('cartIcon');
+        const accountDropdown = document.getElementById('accountDropdown');
+        const wishlistDropdown = document.getElementById('wishlistDropdown');
+        const cartDropdown = document.getElementById('cartDropdown');
+        const overlay = document.getElementById('overlay');
+        const signInModal = document.getElementById('signInModal');
+        
+        let activeDropdown = null;
+
+        // Toggle Dropdown Function
+        function toggleDropdown(dropdown, icon) {
+            const isActive = dropdown.classList.contains('active');
+            
+            // Close all dropdowns
+            closeAllDropdowns();
+            
+            if (!isActive) {
+                dropdown.classList.add('active');
+                icon.classList.add('active');
+                overlay.classList.add('active');
+                activeDropdown = dropdown;
+            }
+        }
+
+        function closeAllDropdowns() {
+            [accountDropdown, wishlistDropdown, cartDropdown].forEach(dropdown => {
+                dropdown.classList.remove('active');
+            });
+            
+            [accountIcon, wishlistIcon, cartIcon].forEach(icon => {
+                icon.classList.remove('active');
+            });
+            
+            overlay.classList.remove('active');
+            activeDropdown = null;
+        }
+
+        // Event Listeners for Icons
+        accountIcon.addEventListener('click', (e) => {
+            e.stopPropagation();
+            toggleDropdown(accountDropdown, accountIcon);
+        });
+
+        wishlistIcon.addEventListener('click', (e) => {
+            e.stopPropagation();
+            toggleDropdown(wishlistDropdown, wishlistIcon);
+        });
+
+        cartIcon.addEventListener('click', (e) => {
+            e.stopPropagation();
+            toggleDropdown(cartDropdown, cartIcon);
+        });
+
+        // Close dropdowns when clicking overlay
+        overlay.addEventListener('click', closeAllDropdowns);
+
+        // Close dropdowns when clicking outside
+        document.addEventListener('click', (e) => {
+            if (activeDropdown && !activeDropdown.contains(e.target) && 
+                !e.target.closest('.icon-box')) {
+                closeAllDropdowns();
+            }
+        });
+
+        // Prevent dropdown from closing when clicking inside
+        [accountDropdown, wishlistDropdown, cartDropdown].forEach(dropdown => {
+            dropdown.addEventListener('click', (e) => {
+                e.stopPropagation();
+            });
+        });
+
+        // Account dropdown actions
+        document.getElementById('signInBtn').addEventListener('click', () => {
+            closeAllDropdowns();
+            openModal('signInModal');
+        });
+
+        document.getElementById('createAccountBtn').addEventListener('click', () => {
+            closeAllDropdowns();
+            alert('Redirecting to create account page...');
+            // In real app: window.location.href = '/register';
+        });
+
+        document.getElementById('myOrdersBtn').addEventListener('click', () => {
+            closeAllDropdowns();
+            alert('Redirecting to orders page...');
+            // window.location.href = '/orders';
+        });
+
+        document.getElementById('wishlistBtn').addEventListener('click', () => {
+            closeAllDropdowns();
+            alert('Redirecting to wishlist page...');
+            // window.location.href = '/wishlist';
+        });
+
+        document.getElementById('settingsBtn').addEventListener('click', () => {
+            closeAllDropdowns();
+            alert('Redirecting to settings page...');
+            // window.location.href = '/settings';
+        });
+
+        document.getElementById('signOutBtn').addEventListener('click', () => {
+            closeAllDropdowns();
+            alert('Signing out...');
+            // Perform sign out logic
+        });
+
+        // Cart functionality
+        function updateCartCount(count) {
+            const cartCount = document.querySelector('.cart-count');
+            cartCount.textContent = count;
+        }
+
+        function addToCart(item) {
+            // This would normally make an API call
+            const currentCount = parseInt(document.querySelector('.cart-count').textContent);
+            updateCartCount(currentCount + 1);
+            
+            // Show notification
+            showNotification(`${item} added to cart!`);
+        }
+
+        // Wishlist functionality
+        function toggleWishlist(item) {
+            const wishlistBtn = document.querySelector('#wishlistIcon .icon-box');
+            // Toggle heart icon
+            const heartIcon = wishlistBtn.querySelector('i');
+            if (heartIcon.classList.contains('far')) {
+                heartIcon.classList.replace('far', 'fas');
+                heartIcon.style.color = 'var(--secondary)';
+                showNotification(`${item} added to wishlist!`);
+            } else {
+                heartIcon.classList.replace('fas', 'far');
+                heartIcon.style.color = '';
+                showNotification(`${item} removed from wishlist`);
+            }
+        }
+
+        // Modal functions
+        function openModal(modalId) {
+            const modal = document.getElementById(modalId);
+            modal.style.display = 'block';
+            overlay.classList.add('active');
+        }
+
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            modal.style.display = 'none';
+            overlay.classList.remove('active');
+        }
+
+        // Form submission
+        document.getElementById('signInForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Sign in successful!');
+            closeModal('signInModal');
+            // Update UI to show user is logged in
+            document.querySelector('#accountIcon .icon-text').textContent = 'My Account';
+        });
+
+        // Notification system
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 100px;
+                right: 20px;
+                background: var(--primary);
+                color: white;
+                padding: 15px 25px;
+                border-radius: 10px;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+                z-index: 2000;
+                animation: slideIn 0.3s ease;
+            `;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.animation = 'slideOut 0.3s ease';
+                setTimeout(() => notification.remove(), 300);
+            }, 3000);
+        }
+
+        // Add CSS animations
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideIn {
+                from { transform: translateX(100%); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+            @keyframes slideOut {
+                from { transform: translateX(0); opacity: 1; }
+                to { transform: translateX(100%); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Cart item controls
+        document.querySelectorAll('.quantity-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const item = this.closest('.cart-item');
+                const quantitySpan = item.querySelector('.item-quantity');
+                let quantity = parseInt(quantitySpan.textContent);
+                
+                if (this.textContent === '+') {
+                    quantity++;
+                } else if (this.textContent === '−' && quantity > 1) {
+                    quantity--;
+                }
+                
+                quantitySpan.textContent = quantity;
+                
+                // Update cart total (simplified)
+                const price = parseFloat(item.querySelector('.cart-item-price').textContent.replace('Rs', '').replace(',', ''));
+                const newSubtotal = quantity * price;
+                
+                // In real app, update cart total via API
+                showNotification('Cart updated');
+            });
+        });
+
+        // Wishlist item controls
+        document.querySelectorAll('.wishlist-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const wishlistItem = this.closest('.wishlist-item');
+                const itemName = wishlistItem.querySelector('h4').textContent;
+                
+                if (this.classList.contains('add-cart-btn')) {
+                    addToCart(itemName);
+                    showNotification(`${itemName} added to cart from wishlist!`);
+                } else if (this.classList.contains('remove-btn')) {
+                    wishlistItem.remove();
+                    showNotification(`${itemName} removed from wishlist`);
+                    
+                    // Update wishlist count if needed
+                    const wishlistItems = document.querySelectorAll('.wishlist-item');
+                    if (wishlistItems.length === 0) {
+                        document.querySelector('#wishlistItems').innerHTML = `
+                            <div class="empty-wishlist">
+                                <i class="far fa-heart"></i>
+                                <p>Your wishlist is empty</p>
+                            </div>
+                        `;
+                    }
+                }
+            });
+        });
+
+        // Product add to cart buttons
+        document.addEventListener('DOMContentLoaded', function() {
+            const addToCartButtons = document.querySelectorAll('.add-to-cart');
+            const cartCount = document.querySelector('.cart-count');
+            
+            addToCartButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Animation feedback
+                    this.textContent = 'Added!';
+                    this.style.background = '#4caf50';
+                    
+                    // Update cart count
+                    let currentCount = parseInt(cartCount.textContent);
+                    cartCount.textContent = currentCount + 1;
+                    
+                    // Reset button after 1.5 seconds
+                    setTimeout(() => {
+                        this.textContent = 'Add to Cart';
+                        this.style.background = '';
+                    }, 1500);
+                    
+                    // Show notification
+                    const productName = this.closest('.product-card').querySelector('.product-title').textContent;
+                    showNotification(`${productName} added to cart!`);
+                });
+            });
+            
+            // Search functionality
+            const searchInput = document.querySelector('.search-bar input');
+            const searchButton = document.querySelector('.search-bar button');
+            
+            searchButton.addEventListener('click', function() {
+                if (searchInput.value.trim() !== '') {
+                    alert(`Searching for: "${searchInput.value}"`);
+                }
+            });
+            
+            searchInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    if (this.value.trim() !== '') {
+                        alert(`Searching for: "${this.value}"`);
+                    }
+                }
+            });
+        });
+    </script>
+    <script src="js/auth.js"></script>
+</body>
+</html>

@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Product Categories | ShopCart - Browse by Category</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="css/categories.css" />
+  </head>
+  <body>
+    <!-- Navigation -->
+   <nav class="navbar">
+  <div class="container">
+    <div class="nav-links">
+      <div class="user-menu" style="display: none">
+        <div class="user-dropdown">
+          <button class="user-dropdown-toggle">
+            <img
+              src="https://via.placeholder.com/30"
+              alt="User"
+              class="user-avatar"
+            />
+            <span id="username">John Doe</span>
+            <i class="fas fa-chevron-down"></i>
+          </button>
+          <div class="user-dropdown-menu">
+            <a href="profile.html" class="dropdown-item">
+              <i class="fas fa-user"></i> My Profile
+            </a>
+            <a href="orders.html" class="dropdown-item">
+              <i class="fas fa-box"></i> My Orders
+            </a>
+            <a href="wishlist.html" class="dropdown-item">
+              <i class="fas fa-heart"></i> Wishlist
+              <span class="wishlist-count">0</span>
+            </a>
+            <a href="settings.html" class="dropdown-item">
+              <i class="fas fa-cog"></i> Settings
+            </a>
+            <hr />
+            <a href="#" class="dropdown-item" onclick="logout()">
+              <i class="fas fa-sign-out-alt"></i> Logout
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button class="mobile-menu-toggle">
+      <i class="fas fa-bars"></i>
+    </button>
+  </div>
+</nav>
+
+    <!-- Categories Header -->
+    <header class="categories-header">
+      <div class="container">
+        <div class="categories-header-content">
+          <h1><i class="fas fa-th-large"></i> Browse by Category</h1>
+          <p class="subtitle">
+            Explore thousands of products organized by category for easy
+            shopping
+          </p>
+
+          <div class="header-stats">
+            <div class="stat-item">
+              <div class="stat-value">25+</div>
+              <div class="stat-label">Categories</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value">10,000+</div>
+              <div class="stat-label">Products</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value">50+</div>
+              <div class="stat-label">Brands</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="category-quick-nav">
+          <a href="#electronics" class="quick-nav-item">
+            <i class="fas fa-laptop"></i>
+            <span>Electronics</span>
+          </a>
+          <a href="#fashion" class="quick-nav-item">
+            <i class="fas fa-tshirt"></i>
+            <span>Fashion</span>
+          </a>
+          <a href="#home" class="quick-nav-item">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+          </a>
+          <a href="#sports" class="quick-nav-item">
+            <i class="fas fa-basketball-ball"></i>
+            <span>Sports</span>
+          </a>
+          <a href="#beauty" class="quick-nav-item">
+            <i class="fas fa-spa"></i>
+            <span>Beauty</span>
+          </a>
+          <a href="#books" class="quick-nav-item">
+            <i class="fas fa-book"></i>
+            <span>Books</span>
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Categories Content -->
+    <main class="categories-container">
+      <div class="container">
+        <!-- Categories Grid -->
+        <section class="categories-grid-section">
+          <div class="section-header">
+            <h2><i class="fas fa-list"></i> All Categories</h2>
+            <div class="sort-options">
+              <select id="sort-categories">
+                <option value="popular">Most Popular</option>
+                <option value="alphabetical">A to Z</option>
+                <option value="products">Most Products</option>
+                <option value="newest">Newest</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="categories-grid" id="categories-grid">
+            <!-- Categories will be loaded here -->
+          </div>
+        </section>
+
+        <!-- Featured Categories -->
+        <section class="featured-categories">
+          <div class="section-header">
+            <h2><i class="fas fa-star"></i> Featured Categories</h2>
+            <p>Shop our most popular categories with special offers</p>
+          </div>
+
+          <div class="featured-grid">
+            <div class="featured-category large" id="electronics">
+              <div class="featured-content">
+                <h3>Electronics</h3>
+                <p>
+                  Latest gadgets, smartphones, laptops, and tech accessories
+                </p>
+                <div class="category-stats">
+                  <span><i class="fas fa-box"></i> 1,200+ Products</span>
+                  <span><i class="fas fa-tag"></i> Up to 50% Off</span>
+                </div>
+                <a
+                  href="products.html?category=electronics"
+                  class="btn btn-primary"
+                >
+                  Shop Now <i class="fas fa-arrow-right"></i>
+                </a>
+              </div>
+              <div class="featured-image">
+                <img
+                  src="https://images.unsplash.com/photo-1498049794561-7780e7231661?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                  alt="Electronics"
+                />
+              </div>
+            </div>
+
+            <div class="featured-category" id="fashion">
+              <div class="featured-content">
+                <h3>Fashion & Apparel</h3>
+                <p>Clothing, shoes, accessories for men, women, and kids</p>
+                <div class="category-stats">
+                  <span><i class="fas fa-box"></i> 2,500+ Products</span>
+                  <span><i class="fas fa-tag"></i> New Arrivals</span>
+                </div>
+                <a
+                  href="products.html?category=fashion"
+                  class="btn btn-primary"
+                >
+                  Shop Now <i class="fas fa-arrow-right"></i>
+                </a>
+              </div>
+              <div class="featured-image">
+                <img
+                  src="https://images.unsplash.com/photo-1445205170230-053b83016050?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                  alt="Fashion"
+                />
+              </div>
+            </div>
+
+            <div class="featured-category" id="home">
+              <div class="featured-content">
+                <h3>Home & Garden</h3>
+                <p>Furniture, decor, kitchenware, and gardening supplies</p>
+                <div class="category-stats">
+                  <span><i class="fas fa-box"></i> 1,800+ Products</span>
+                  <span><i class="fas fa-tag"></i> Free Shipping</span>
+                </div>
+                <a href="products.html?category=home" class="btn btn-primary">
+                  Shop Now <i class="fas fa-arrow-right"></i>
+                </a>
+              </div>
+              <div class="featured-image">
+                <img
+                  src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                  alt="Home"
+                />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Subcategories Section -->
+        <section class="subcategories-section">
+          <div class="section-header">
+            <h2><i class="fas fa-sitemap"></i> Browse Subcategories</h2>
+            <p>
+              Find exactly what you're looking for with detailed subcategories
+            </p>
+          </div>
+
+          <div class="subcategories-tabs">
+            <div class="tab-buttons">
+              <button class="tab-btn active" data-tab="electronics-tab">
+                Electronics
+              </button>
+              <button class="tab-btn" data-tab="fashion-tab">Fashion</button>
+              <button class="tab-btn" data-tab="home-tab">Home & Garden</button>
+              <button class="tab-btn" data-tab="sports-tab">Sports</button>
+              <button class="tab-btn" data-tab="beauty-tab">Beauty</button>
+            </div>
+
+            <div class="tab-content active" id="electronics-tab">
+              <div class="subcategory-grid">
+                <a
+                  href="products.html?subcategory=smartphones"
+                  class="subcategory-item"
+                >
+                  <i class="fas fa-mobile-alt"></i>
+                  <span>Smartphones</span>
+                  <small>450 products</small>
+                </a>
+                <a
+                  href="products.html?subcategory=laptops"
+                  class="subcategory-item"
+                >
+                  <i class="fas fa-laptop"></i>
+                  <span>Laptops</span>
+                  <small>320 products</small>
+                </a>
+                <a href="products.html?subcategory=tv" class="subcategory-item">
+                  <i class="fas fa-tv"></i>
+                  <span>TV & Home Theater</span>
+                  <small>280 products</small>
+                </a>
+                <a
+                  href="products.html?subcategory=audio"
+                  class="subcategory-item"
+                >
+                  <i class="fas fa-headphones"></i>
+                  <span>Audio & Headphones</span>
+                  <small>510 products</small>
+                </a>
+                <a
+                  href="products.html?subcategory=gaming"
+                  class="subcategory-item"
+                >
+                  <i class="fas fa-gamepad"></i>
+                  <span>Gaming</span>
+                  <small>390 products</small>
+                </a>
+                <a
+                  href="products.html?subcategory=cameras"
+                  class="subcategory-item"
+                >
+                  <i class="fas fa-camera"></i>
+                  <span>Cameras & Photography</span>
+                  <small>220 products</small>
+                </a>
+                <a
+                  href="products.html?subcategory=wearables"
+                  class="subcategory-item"
+                >
+                  <i class="fas fa-smartwatch"></i>
+                  <span>Wearable Tech</span>
+                  <small>180 products</small>
+                </a>
+                <a
+                  href="products.html?subcategory=accessories"
+                  class="subcategory-item"
+                >
+                  <i class="fas fa-memory"></i>
+                  <span>Accessories</span>
+                  <small>850 products</small>
+                </a>
+              </div>
+            </div>
+
+            <div class="tab-content" id="fashion-tab">
+              <!-- Fashion subcategories would go here -->
+            </div>
+
+            <div class="tab-content" id="home-tab">
+              <!-- Home subcategories would go here -->
+            </div>
+          </div>
+        </section>
+
+        <!-- Category Deals -->
+        <section class="category-deals">
+          <div class="section-header">
+            <h2><i class="fas fa-fire"></i> Hot Deals by Category</h2>
+            <p>
+              Don't miss these limited-time offers in your favorite categories
+            </p>
+          </div>
+
+          <div class="deals-carousel">
+            <div class="deal-card">
+              <div class="deal-badge">50% OFF</div>
+              <img
+                src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
+                alt="Camera Deal"
+              />
+              <div class="deal-content">
+                <h3>Camera & Photography</h3>
+                <p>Save up to 50% on DSLR cameras and accessories</p>
+                <a
+                  href="products.html?category=electronics&deal=true"
+                  class="btn btn-danger"
+                >
+                  Shop Deal <i class="fas fa-arrow-right"></i>
+                </a>
+              </div>
+            </div>
+
+            <div class="deal-card">
+              <div class="deal-badge">40% OFF</div>
+              <img
+                src="https://images.unsplash.com/photo-1491553895911-0055eca6402d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
+                alt="Fashion Deal"
+              />
+              <div class="deal-content">
+                <h3>Summer Fashion</h3>
+                <p>40% off on summer collection for men & women</p>
+                <a
+                  href="products.html?category=fashion&deal=true"
+                  class="btn btn-danger"
+                >
+                  Shop Deal <i class="fas fa-arrow-right"></i>
+                </a>
+              </div>
+            </div>
+
+            <div class="deal-card">
+              <div class="deal-badge">30% OFF</div>
+              <img
+                src="https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
+                alt="Home Deal"
+              />
+              <div class="deal-content">
+                <h3>Home Furniture</h3>
+                <p>30% off on living room and bedroom furniture</p>
+                <a
+                  href="products.html?category=home&deal=true"
+                  class="btn btn-danger"
+                >
+                  Shop Deal <i class="fas fa-arrow-right"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        
+
+        <!-- Category Tips -->
+        <section class="category-tips">
+          <div class="section-header">
+            <h2><i class="fas fa-lightbulb"></i> Shopping Tips by Category</h2>
+            <p>Expert advice to help you make the best purchase decisions</p>
+          </div>
+
+          <div class="tips-grid">
+            <div class="tip-card">
+              <div class="tip-icon">
+                <i class="fas fa-laptop"></i>
+              </div>
+              <h3>Buying Electronics</h3>
+              <ul>
+                <li>Check warranty and return policies</li>
+                <li>Compare specs and read reviews</li>
+                <li>Look for energy-efficient models</li>
+                <li>Consider future-proofing your purchase</li>
+              </ul>
+            </div>
+
+            <div class="tip-card">
+              <div class="tip-icon">
+                <i class="fas fa-tshirt"></i>
+              </div>
+              <h3>Fashion Shopping</h3>
+              <ul>
+                <li>Check size guides before ordering</li>
+                <li>Read care instructions carefully</li>
+                <li>Mix and match basics with trends</li>
+                <li>Invest in quality essentials</li>
+              </ul>
+            </div>
+
+            <div class="tip-card">
+              <div class="tip-icon">
+                <i class="fas fa-home"></i>
+              </div>
+              <h3>Home & Furniture</h3>
+              <ul>
+                <li>Measure your space before buying</li>
+                <li>Consider assembly requirements</li>
+                <li>Check material quality and durability</li>
+                <li>Look for multi-functional pieces</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <!-- Newsletter -->
+    <section class="newsletter-section">
+      <div class="container">
+        <div class="newsletter-content">
+          <h3><i class="fas fa-envelope"></i> Get Category Updates</h3>
+          <p>
+            Subscribe to receive updates on new arrivals, deals, and trends in
+            your favorite categories
+          </p>
+          <div class="newsletter-form">
+            <div class="input-group">
+              <input type="email" placeholder="Enter your email" />
+              <button class="btn btn-primary">
+                <i class="fas fa-paper-plane"></i> Subscribe
+              </button>
+            </div>
+            <div class="category-checkboxes">
+              <label> <input type="checkbox" checked /> Electronics </label>
+              <label> <input type="checkbox" /> Fashion </label>
+              <label> <input type="checkbox" /> Home & Garden </label>
+              <label> <input type="checkbox" /> Sports </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- JavaScript Files -->
+    <script src="js/main.js"></script>
+    <script src="js/categories.js"></script>
+
+    <script>
+      // Mobile menu toggle
+      document
+        .querySelector(".mobile-menu-toggle")
+        ?.addEventListener("click", function () {
+          const navLinks = document.querySelector(".nav-links");
+          const icon = this.querySelector("i");
+
+          navLinks.classList.toggle("active");
+
+          if (navLinks.classList.contains("active")) {
+            icon.className = "fas fa-times";
+          } else {
+            icon.className = "fas fa-bars";
+          }
+        });
+
+      // Close mobile menu when clicking outside
+      document.addEventListener("click", function (event) {
+        const navLinks = document.querySelector(".nav-links");
+        const mobileToggle = document.querySelector(".mobile-menu-toggle");
+
+        if (
+          navLinks.classList.contains("active") &&
+          !event.target.closest(".nav-links") &&
+          !event.target.closest(".mobile-menu-toggle")
+        ) {
+          navLinks.classList.remove("active");
+          mobileToggle.querySelector("i").className = "fas fa-bars";
+        }
+      });
+
+      // User dropdown
+      const userDropdownToggle = document.querySelector(
+        ".user-dropdown-toggle"
+      );
+      const userDropdownMenu = document.querySelector(".user-dropdown-menu");
+
+      if (userDropdownToggle && userDropdownMenu) {
+        userDropdownToggle.addEventListener("click", function (e) {
+          e.stopPropagation();
+          userDropdownMenu.classList.toggle("show");
+        });
+
+        document.addEventListener("click", function () {
+          userDropdownMenu.classList.remove("show");
+        });
+
+        userDropdownMenu.addEventListener("click", function (e) {
+          e.stopPropagation();
+        });
+      }
+
+      // Search functionality
+      const searchInput = document.querySelector(".search-bar input");
+      const searchButton = document.querySelector(".search-bar button");
+
+      if (searchInput && searchButton) {
+        searchButton.addEventListener("click", performSearch);
+        searchInput.addEventListener("keypress", function (e) {
+          if (e.key === "Enter") {
+            performSearch();
+          }
+        });
+
+        function performSearch() {
+          const query = searchInput.value.trim();
+          if (query) {
+            window.location.href = `products.html?search=${encodeURIComponent(
+              query
+            )}`;
+          }
+        }
+      }
+
+      // Smooth scroll for anchor links
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          const targetId = this.getAttribute("href");
+          if (targetId === "#") return;
+
+          const targetElement = document.querySelector(targetId);
+          if (targetElement) {
+            e.preventDefault();
+            targetElement.scrollIntoView({
+              behavior: "smooth",
+              block: "start",
+            });
+          }
+        });
+      });
+
+      // Update cart count
+      if (localStorage.getItem("cartCount")) {
+        document.querySelector(".cart-count").textContent =
+          localStorage.getItem("cartCount");
+      }
+
+      // Set active nav link
+      const currentPage = window.location.pathname.split("/").pop();
+      const navLinks = document.querySelectorAll(".nav-links a");
+
+      navLinks.forEach((link) => {
+        if (link.getAttribute("href") === currentPage) {
+          link.classList.add("active");
+        }
+      });
+    </script>
+  </body>
+</html>

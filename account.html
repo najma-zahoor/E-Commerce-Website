@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Account | ShopCart</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/account.css">
+</head>
+<body>
+    <!-- Account Container -->
+    <div class="container account-container">
+        <div class="account-header">
+            <h1>My Account</h1>
+            <p class="account-subtitle">Manage your profile, orders, and preferences</p>
+        </div>
+
+        <div class="account-layout">
+            <!-- Sidebar -->
+            <div class="account-sidebar">
+                <div class="user-profile">
+                    <div class="profile-avatar" id="profileAvatar">
+                        JS
+                    </div>
+                    <div class="profile-name" id="profileName">John Smith</div>
+                    <div class="profile-email" id="profileEmail">john.smith@example.com</div>
+                    <div class="profile-tier" id="profileTier">Gold Member</div>
+                </div>
+                <div class="sidebar-menu">
+                    <div class="menu-item active" data-tab="dashboard">
+                        <i class="fas fa-home"></i>
+                        <span>Dashboard</span>
+                    </div>
+                    <div class="menu-item" data-tab="orders">
+                        <i class="fas fa-shopping-bag"></i>
+                        <span>My Orders</span>
+                        <span class="menu-badge" id="ordersBadge">3</span>
+                    </div>
+                    <div class="menu-item" data-tab="addresses">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>My Addresses</span>
+                    </div>
+                    <div class="menu-item" data-tab="wishlist">
+                        <i class="fas fa-heart"></i>
+                        <span>Wishlist</span>
+                        <span class="menu-badge" id="wishlistBadge">5</span>
+                    </div>
+                    <div class="menu-item" data-tab="settings">
+                        <i class="fas fa-cog"></i>
+                        <span>Settings</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="account-main">
+                <!-- Dashboard Tab -->
+                <div class="tab-content active" id="dashboard">
+                    <div class="welcome-message">
+                        <h2>Welcome back, <span id="welcomeName">John</span>!</h2>
+                        <p>Here's an overview of your account activity</p>
+                    </div>
+
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-shopping-bag"></i>
+                            </div>
+                            <div class="stat-value" id="ordersCount">3</div>
+                            <div class="stat-label">Total Orders</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <div class="stat-value" id="averageRating">4.8</div>
+                            <div class="stat-label">Average Rating</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-heart"></i>
+                            </div>
+                            <div class="stat-value" id="wishlistCount">5</div>
+                            <div class="stat-label">Wishlist Items</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-trophy"></i>
+                            </div>
+                            <div class="stat-value" id="memberTier">Gold</div>
+                            <div class="stat-label">Member Tier</div>
+                        </div>
+                    </div>
+
+                    <div class="recent-activity">
+                        <h3>Recent Activity</h3>
+                        <div class="activity-list" id="activityList">
+                            <!-- Activities will be loaded by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Orders Tab -->
+                <div class="tab-content" id="orders">
+                    <div class="orders-header">
+                        <h2>My Orders</h2>
+                        <div class="orders-filter">
+                            <select class="filter-select" id="orderFilter">
+                                <option value="all">All Orders</option>
+                                <option value="pending">Pending</option>
+                                <option value="processing">Processing</option>
+                                <option value="shipped">Shipped</option>
+                                <option value="delivered">Delivered</option>
+                            </select>
+                            <select class="filter-select" id="timeFilter">
+                                <option value="all">All Time</option>
+                                <option value="month">Last Month</option>
+                                <option value="3months">Last 3 Months</option>
+                                <option value="year">Last Year</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="orders-list" id="ordersList">
+                        <!-- Orders will be loaded by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Addresses Tab -->
+                <div class="tab-content" id="addresses">
+                    <div class="addresses-header">
+                        <h2>My Addresses</h2>
+                        <button class="btn-add-address" id="addAddressBtn">
+                            <i class="fas fa-plus"></i> Add New Address
+                        </button>
+                    </div>
+                    <p style="color: var(--gray); margin-bottom: 30px;">Manage your delivery addresses</p>
+
+                    <div class="addresses-grid" id="addressesGrid">
+                        <!-- Addresses will be loaded by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Wishlist Tab -->
+                <div class="tab-content" id="wishlist">
+                    <h2>My Wishlist</h2>
+                    <p style="color: var(--gray); margin-bottom: 30px;">Items you've saved for later</p>
+
+                    <div class="wishlist-grid" id="wishlistGrid">
+                        <!-- Wishlist items will be loaded by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Settings Tab -->
+                <div class="tab-content" id="settings">
+                    <h2>Account Settings</h2>
+                    <p style="color: var(--gray); margin-bottom: 30px;">Manage your account preferences</p>
+
+                    <div class="settings-section">
+                        <h3>Personal Information</h3>
+                        <form class="settings-form" id="personalForm">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="firstName">First Name</label>
+                                    <input type="text" id="firstName" class="form-control" value="John">
+                                </div>
+                                <div class="form-group">
+                                    <label for="lastName">Last Name</label>
+                                    <input type="text" id="lastName" class="form-control" value="Smith">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email Address</label>
+                                <input type="email" id="email" class="form-control" value="john.smith@example.com">
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Phone Number</label>
+                                <input type="tel" id="phone" class="form-control" value="+92 0123456789">
+                            </div>
+                            <button type="submit" class="btn-save">
+                                <i class="fas fa-save"></i> Save Changes
+                            </button>
+                        </form>
+                    </div>
+
+                    <div class="settings-section">
+                        <h3>Password</h3>
+                        <form class="settings-form" id="passwordForm">
+                            <div class="form-group">
+                                <label for="currentPassword">Current Password</label>
+                                <input type="password" id="currentPassword" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="newPassword">New Password</label>
+                                <input type="password" id="newPassword" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="confirmPassword">Confirm New Password</label>
+                                <input type="password" id="confirmPassword" class="form-control">
+                            </div>
+                            <button type="submit" class="btn-save">
+                                <i class="fas fa-key"></i> Update Password
+                            </button>
+                        </form>
+                    </div>
+
+                    <div class="settings-section">
+                        <h3>Notifications</h3>
+                        <form class="settings-form" id="notificationForm">
+                            <div class="form-group">
+                                <div class="checkbox-group">
+                                    <input type="checkbox" id="emailNotifications" checked>
+                                    <label for="emailNotifications">Email Notifications</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="checkbox-group">
+                                    <input type="checkbox" id="promoEmails" checked>
+                                    <label for="promoEmails">Promotional Emails</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="checkbox-group">
+                                    <input type="checkbox" id="orderUpdates" checked>
+                                    <label for="orderUpdates">Order Updates</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="checkbox-group">
+                                    <input type="checkbox" id="wishlistNotifications">
+                                    <label for="wishlistNotifications">Wishlist Notifications</label>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn-save">
+                                <i class="fas fa-bell"></i> Save Preferences
+                            </button>
+                        </form>
+                    </div>
+
+                    <div class="settings-section">
+                        <div class="danger-zone">
+                            <h3>Danger Zone</h3>
+                            <p style="margin-bottom: 20px; color: var(--gray);">Permanently delete your account and all associated data.</p>
+                            <button class="btn-danger" id="deleteAccountBtn">
+                                <i class="fas fa-trash-alt"></i> Delete Account
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Address Modal -->
+    <div class="modal" id="addressModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Add New Address</h3>
+                <button class="modal-close" id="closeModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="addressForm">
+                    <div class="form-group">
+                        <label for="addressName">Address Name</label>
+                        <input type="text" id="addressName" class="form-control" placeholder="e.g., Home, Office" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="fullName">Full Name</label>
+                        <input type="text" id="fullName" class="form-control" placeholder="Full Name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="addressLine1">Address Line 1</label>
+                        <input type="text" id="addressLine1" class="form-control" placeholder="Street address" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="addressLine2">Address Line 2 (Optional)</label>
+                        <input type="text" id="addressLine2" class="form-control" placeholder="Apartment, suite, unit">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="city">City</label>
+                            <input type="text" id="city" class="form-control" placeholder="City" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="state">State</label>
+                            <input type="text" id="state" class="form-control" placeholder="State" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="zipCode">Zip Code</label>
+                            <input type="text" id="zipCode" class="form-control" placeholder="Zip Code" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="country">Country</label>
+                            <input type="text" id="country" class="form-control" value="Pakistan" readonly>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="phoneNumber">Phone Number</label>
+                        <input type="tel" id="phoneNumber" class="form-control" placeholder="+92 0123456789" required>
+                    </div>
+                    <div class="form-group">
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="setDefault" checked>
+                            <label for="setDefault">Set as default address</label>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn-save">
+                        <i class="fas fa-map-marker-alt"></i> Save Address
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <i class="fas fa-check-circle"></i>
+        <span id="toastMessage"></span>
+    </div>
+
+    <!-- JavaScript Files -->
+    <script src="js/main.js"></script>
+    <script src="js/account.js"></script>
+</body>
+</html>
